@@ -1,0 +1,58 @@
+.containerStyle {
+  font-family: sans-serif;
+  width: 400px; /* 👈 fixed width */
+  height: 450px; /* or fixed like "500px" if you prefer exact height */
+  padding: 16px;
+  background-color: #f9f9f9;
+  border: 2px solid #444;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.moduleHeader {
+  font-size: 24px;
+  font-weight: #333;
+  margin-bottom: 20px;
+}
+
+.labelRowStyle {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.labelStyle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.styledNumInput {
+  font-size: 18px;
+  width: 50px;
+  height: 25px;
+  border-radius: 20px;
+  border: 2px solid #444;
+  padding-left: 10px;
+  text-align: center;
+  outline: none;
+  justify-self: end;
+}
+
+.styledTextInput {
+  font-size: 18px;
+  width: 100px;
+  height: 25px;
+  border-radius: 20px;
+  border: 2px solid #444;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  outline: none;
+}
