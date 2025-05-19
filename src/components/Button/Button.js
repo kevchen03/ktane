@@ -25,19 +25,11 @@ const Button = (props) => {
     } else {
       setResponse("Hold");
     }
-  });
-
-  const handleColorChange = (newColor) => {
-    setColor(newColor);
-  };
-
-  const handleLabelChange = (newLabel) => {
-    setLabel(newLabel);
-  };
+  }, [props.FRK, props.CAR, props.batteries]);
 
   useEffect(() => {
     determineRule(color, label);
-  }, [color, label, props.CAR, props.FRK, props.batteries]);
+  }, [color, label, props.CAR, props.FRK, props.batteries, determineRule]);
 
   return (
     <div className="containerStyle">
@@ -81,7 +73,7 @@ const Button = (props) => {
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <img src={holdImage} style={{ width: "80%", height: "auto" }} />
+        <img src={holdImage} style={{ width: "80%", height: "auto" }} alt="Hold Info"/>
       </div>
     </div>
   );
