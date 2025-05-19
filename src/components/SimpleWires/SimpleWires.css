@@ -36,8 +36,3 @@
   transition: background-color 0.3s ease;
 }
 
-.response {
-  font-weight: bold;
-  color: green;
-  margin-top: 15px;
-}

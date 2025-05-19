@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import SimpleWires from "./components/SimpleWires/SimpleWires";
 import SimpleMaze from "./components/SimpleMaze/SimpleMaze";
+import Button from "./components/Button/Button";
 import "./styling/commonStyles.css";
 import "./App.css";
 
 function App() {
   const [serial, setSerial] = useState("");
   const [serialProps, setSerialProps] = useState({ even: false, vowel: false });
+  const [litIndicators, setLitIndicators] = useState({
+    CAR: null,
+    FRK: null,
+  });
+  const [batteries, setBatteries] = useState({
+    AA: 0,
+    D: 0,
+  });
 
-  const handleSerial = (newSerial) => {
+  const updateSerial = (newSerial) => {
     // Clean and convert to uppercase
     const cleaned = newSerial.replace(/\s+/g, "").toUpperCase().slice(0, 6); // <-- limit to 6 characters
     setSerial(cleaned);
@@ -32,19 +41,84 @@ function App() {
     });
   };
 
+  const updateBatteries = (event) => {
+    const { name, value } = event.target;
+    const val = Number.parseInt(value);
+    if (Number.isNaN(val) || val < 0) return;
+    const newBatteries = { ...batteries, [name]: val };
+    setBatteries(newBatteries);
+  };
+
   return (
-    <div>
-      <div className="topbar">
-        <label htmlFor="serial" style={{ fontWeight: "bold" }}>
-          Serial Number:
-        </label>
-        <input
-          type="text"
-          value={serial}
-          onChange={(e) => handleSerial(e.target.value)}
-          maxLength={6} // <-- Add maxLength to restrict input to 6 characters
-          className="styledTextInput"
-        />
+    <div className="appLayout">
+      <div className="sidebar">
+        <div className="labelRowStyle">
+          <label htmlFor="serial" className="labelStyle">
+            Serial Number:
+          </label>
+          <input
+            type="text"
+            value={serial}
+            onChange={(e) => updateSerial(e.target.value)}
+            maxLength={6} // <-- Add maxLength to restrict input to 6 characters
+            className="styledTextInput"
+          />
+        </div>
+        <div
+          style={{
+            borderTop: "2px solid #444",
+          }}
+        >
+          <h3>Lit Indicators</h3>
+          {Object.entries(litIndicators).map(([key, value]) => (
+            <div key={key} className="labelRowStyle">
+              <label className="labelStyle">{key}</label>
+              <div style={{ display: "flex", gap: "8px" }}>
+                {[
+                  { label: "DNE", val: null },
+                  { label: "Unlit", val: false },
+                  { label: "Lit", val: true },
+                ].map(({ label, val }) => (
+                  <button
+                    className="litIndicator"
+                    key={label}
+                    onClick={() =>
+                      setLitIndicators((prev) => ({ ...prev, [key]: val }))
+                    }
+                    style={{
+                      backgroundColor: value === val ? "#007bff" : "#f0f0f0",
+                      color: value === val ? "#fff" : "#000",
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            borderTop: "2px solid #444",
+          }}
+        >
+          <h3>Batteries</h3>
+          {Object.entries(batteries).map(([key, value]) => {
+            return (
+              <div key={key} className="labelRowStyle">
+                <label htmlFor={key} className="labelStyle">{key}</label>
+                <input
+                  id={key}
+                  name={key}
+                  className="styledNumInput"
+                  type="number"
+                  value={value}
+                  onChange={(e) => updateBatteries(e)}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="moduleGrid">
         <div className="moduleBox">
@@ -52,7 +126,15 @@ function App() {
         </div>
 
         <div className="moduleBox">
-          <SimpleMaze serialProps={serialProps} />
+          <SimpleMaze />
+        </div>
+
+        <div className="moduleBox">
+          <Button
+            CAR={litIndicators.CAR}
+            FRK={litIndicators.FRK}
+            batteries={batteries.AA + batteries.D}
+          />
         </div>
       </div>
     </div>

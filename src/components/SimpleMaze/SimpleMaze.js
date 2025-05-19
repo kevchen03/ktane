@@ -112,7 +112,7 @@ const SimpleMaze = () => {
       <div className="labelRowStyle">
         <label className="labelStyle">Maze Circle X,Y:</label>
         <select
-          className="styled-select"
+          className="styledSelect"
           value={String(mazeChoice)}
           onChange={(e) => handleMazeSelection(e)}
         >

@@ -15,7 +15,7 @@
 .moduleHeader {
   font-size: 24px;
   font-weight: #333;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .labelRowStyle {
@@ -42,7 +42,7 @@
   padding-left: 10px;
   text-align: center;
   outline: none;
-  justify-self: end;
+  /* justify-self: end; */
 }
 
 .styledTextInput {
@@ -55,4 +55,41 @@
   padding-right: 10px;
   text-align: center;
   outline: none;
+}
+
+.styledSelect {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  box-sizing: border-box;
+  background-color: white;
+  color: #333;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><polygon points="0,0 10,0 5,5" fill="%23333"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 10px 5px;
+  cursor: pointer;
+  min-width: 180px;
+  max-width: 240px;
+  width: 100%;
+}
+
+.styledSelect:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.styledSelect option {
+  padding: 8px;
+  background-color: white;
+  color: #333;
+}
+
+.response {
+  font-weight: bold;
+  color: green;
+  margin-top: 15px;
 }
