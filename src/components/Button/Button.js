@@ -68,12 +68,12 @@ const Button = (props) => {
       </div>
       <div className="labelRowStyle">
         <label className="labelStyle">Action:</label>
-        <div className="response" style={{ paddingRight: "5px" }}>
+        <div className="response" style={{ paddingRight: "5px", marginBottom: "15px" }}>
           {response}
         </div>
       </div>
       <div style={{ textAlign: "center" }}>
-        <img src={holdImage} style={{ width: "80%", height: "auto" }} alt="Hold Info"/>
+        <img src={holdImage} style={{ width: "75%", height: "auto" }} alt="Hold Info"/>
       </div>
     </div>
   );
