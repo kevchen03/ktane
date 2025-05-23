@@ -7,6 +7,7 @@ import "./App.css";
 
 function App() {
   const [serial, setSerial] = useState("");
+  const [strikes, setStrikes] = useState(0);
   const [serialProps, setSerialProps] = useState({ even: false, vowel: false });
   const [litIndicators, setLitIndicators] = useState({
     CAR: null,
@@ -41,6 +42,12 @@ function App() {
     });
   };
 
+  const updateStrikes = (newStrikes) => {
+    const val = Number.parseInt(newStrikes);
+    if (Number.isNaN(val) || val < 0) return;
+    setStrikes(val);
+  }
+
   const updateBatteries = (event) => {
     const { name, value } = event.target;
     const val = Number.parseInt(value);
@@ -57,11 +64,24 @@ function App() {
             Serial Number:
           </label>
           <input
+            id="serial"
             type="text"
             value={serial}
             onChange={(e) => updateSerial(e.target.value)}
             maxLength={6} // <-- Add maxLength to restrict input to 6 characters
             className="styledTextInput"
+          />
+        </div>
+        <div className="labelRowStyle">
+          <label htmlFor="strikes" className="labelStyle">
+            Strikes:
+          </label>
+          <input
+            id="strikes"
+            type="number"
+            value={strikes}
+            onChange={(e) => updateStrikes(e.target.value)}
+            className="styledNumInput"
           />
         </div>
         <div
