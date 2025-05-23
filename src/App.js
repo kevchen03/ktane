@@ -4,6 +4,7 @@ import SimpleMaze from "./components/SimpleMaze/SimpleMaze";
 import Button from "./components/Button/Button";
 import "./styling/commonStyles.css";
 import "./App.css";
+import SimonSays from "./components/SimonSays/SimonSays";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -154,6 +155,13 @@ function App() {
             CAR={litIndicators.CAR}
             FRK={litIndicators.FRK}
             batteries={batteries.AA + batteries.D}
+          />
+        </div>
+
+        <div className="moduleBox">
+          <SimonSays
+            serialProps={serialProps}
+            strikes={strikes}
           />
         </div>
       </div>
