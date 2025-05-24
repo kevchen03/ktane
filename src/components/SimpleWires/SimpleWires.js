@@ -141,7 +141,7 @@ const SimpleWires = (props) => {
 
   return (
     <div className="containerStyle">
-      <h2 className="moduleHeader">Simple Wire Module</h2>
+      <h2 className="moduleHeader">Simple Wires</h2>
 
       {/* Number of wires input */}
       <div className="labelRowStyle">

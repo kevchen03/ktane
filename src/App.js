@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import "./styling/commonStyles.css";
+import "./App.css";
 import SimpleWires from "./components/SimpleWires/SimpleWires";
 import SimpleMaze from "./components/SimpleMaze/SimpleMaze";
 import Button from "./components/Button/Button";
-import "./styling/commonStyles.css";
-import "./App.css";
 import SimonSays from "./components/SimonSays/SimonSays";
+import Keypads from "./components/Keypads/Keypads";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -47,7 +48,7 @@ function App() {
     const val = Number.parseInt(newStrikes);
     if (Number.isNaN(val) || val < 0) return;
     setStrikes(val);
-  }
+  };
 
   const updateBatteries = (event) => {
     const { name, value } = event.target;
@@ -127,7 +128,9 @@ function App() {
           {Object.entries(batteries).map(([key, value]) => {
             return (
               <div key={key} className="labelRowStyle">
-                <label htmlFor={key} className="labelStyle">{key}</label>
+                <label htmlFor={key} className="labelStyle">
+                  {key}
+                </label>
                 <input
                   id={key}
                   name={key}
@@ -147,10 +150,6 @@ function App() {
         </div>
 
         <div className="moduleBox">
-          <SimpleMaze />
-        </div>
-
-        <div className="moduleBox">
           <Button
             CAR={litIndicators.CAR}
             FRK={litIndicators.FRK}
@@ -159,10 +158,15 @@ function App() {
         </div>
 
         <div className="moduleBox">
-          <SimonSays
-            serialProps={serialProps}
-            strikes={strikes}
-          />
+          <Keypads/>
+        </div>
+
+        <div className="moduleBox">
+          <SimonSays serialProps={serialProps} strikes={strikes} />
+        </div>
+
+        <div className="moduleBox">
+          <SimpleMaze />
         </div>
       </div>
     </div>

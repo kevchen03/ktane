@@ -33,7 +33,7 @@ const Button = (props) => {
 
   return (
     <div className="containerStyle">
-      <h2 className="moduleHeader">Button Module</h2>
+      <h2 className="moduleHeader">Button</h2>
       <div className="labelRowStyle">
         <label className="labelStyle">Button Color:</label>
         <select

@@ -106,7 +106,7 @@ const SimpleMaze = () => {
 
   return (
     <div className="containerStyle">
-      <h2 className="moduleHeader">Simple Maze Module</h2>
+      <h2 className="moduleHeader">Simple Maze</h2>
 
       {/* Locator */}
       <div className="labelRowStyle">
