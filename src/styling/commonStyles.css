@@ -14,7 +14,8 @@
 
 .moduleHeader {
   font-size: 24px;
-  font-weight: #333;
+  font-weight: bold;
+  color: #333;
   margin-bottom: 15px;
 }
 
@@ -104,4 +105,8 @@
   margin-top: 16px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   transition: background-color 0.3s ease;
+}
+
+.resetButton:hover {
+  background-color: #444;
 }

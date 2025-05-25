@@ -8,13 +8,13 @@ const SimpleWires = (props) => {
   const [selectedColors, setSelectedColors] = useState([]);
   const [response, setResponse] = useState("");
   const colorOptions = ["r", "b", "w", "k", "y"];
-	const colorMap = {
-		r: "red",
-		b: "blue",
-		w: "white",
-		k: "black",
-		y: "yellow"
-	};
+  const colorMap = {
+    r: "red",
+    b: "blue",
+    w: "white",
+    k: "black",
+    y: "yellow",
+  };
 
   const handleNumWireChange = (event) => {
     const val = Number.parseInt(event.target.value);
@@ -30,10 +30,10 @@ const SimpleWires = (props) => {
     setSelectedColors(newSelection);
   };
 
-	const deselectWire = (i) => {
-		const updated = selectedColors.filter((_, index) => index !== i);
-		setSelectedColors(updated);
-	}
+  const deselectWire = (i) => {
+    const updated = selectedColors.filter((_, index) => index !== i);
+    setSelectedColors(updated);
+  };
 
   const resetSelection = () => {
     setSelectedColors([]);
@@ -207,7 +207,7 @@ const SimpleWires = (props) => {
 
       {/* Reset button */}
       <button
-        onClick={resetSelection}
+        onClick={() => resetSelection()}
         className="resetButton"
         onMouseOver={(e) => (e.target.style.backgroundColor = "#444")}
         onMouseOut={(e) => (e.target.style.backgroundColor = "#2b2b2b")}
@@ -216,9 +216,7 @@ const SimpleWires = (props) => {
       </button>
 
       {/* Result */}
-      <p className="response">
-        {response}
-      </p>
+      <p className="response">{response}</p>
     </div>
   );
 };

@@ -103,10 +103,7 @@ const Keypads = () => {
           ))}
       </div>
 
-      <button
-        onClick={() => setSelectedSymbols([])}
-        className="resetButton"
-      >
+      <button onClick={() => setSelectedSymbols([])} className="resetButton">
         🔁 Reset
       </button>
     </div>
