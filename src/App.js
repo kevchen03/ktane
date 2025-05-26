@@ -6,6 +6,7 @@ import SimpleMaze from "./components/SimpleMaze/SimpleMaze";
 import Button from "./components/Button/Button";
 import SimonSays from "./components/SimonSays/SimonSays";
 import Keypads from "./components/Keypads/Keypads";
+import WhosOnFirst from "./components/WhosOnFirst/WhosOnFirst";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -158,13 +159,17 @@ function App() {
         </div>
 
         <div className="moduleBox">
-          <Keypads/>
+          <Keypads />
         </div>
 
         <div className="moduleBox">
           <SimonSays serialProps={serialProps} strikes={strikes} />
         </div>
 
+        <div className="moduleBox">
+          <WhosOnFirst />
+        </div>
+        
         <div className="moduleBox">
           <SimpleMaze />
         </div>
