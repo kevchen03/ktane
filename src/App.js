@@ -9,6 +9,7 @@ import WhosOnFirst from "./components/Original/WhosOnFirst/WhosOnFirst";
 import Memory from "./components/Original/Memory/Memory";
 import MorseCode from "./components/Original/MorseCode/MorseCode";
 import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
+import ComplicatedWires from "./components/Original/ComplicatedWires/ComplicatedWires";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -21,6 +22,14 @@ function App() {
   const [batteries, setBatteries] = useState({
     AA: 0,
     D: 0,
+  });
+  const [ports, setPorts] = useState({
+    "DVI-D": 0,
+    Parallel: 0,
+    "PS/2": 0,
+    "RJ-45": 0,
+    Serial: 0,
+    "Stereo RCA": 0,
   });
 
   const updateSerial = (newSerial) => {
@@ -59,6 +68,14 @@ function App() {
     if (Number.isNaN(val) || val < 0) return;
     const newBatteries = { ...batteries, [name]: val };
     setBatteries(newBatteries);
+  };
+
+  const updatePorts = (event) => {
+    const { name, value } = event.target;
+    const val = Number.parseInt(value);
+    if (Number.isNaN(val) || val < 0) return;
+    const newBatteries = { ...ports, [name]: val };
+    setPorts(newBatteries);
   };
 
   return (
@@ -146,6 +163,26 @@ function App() {
             );
           })}
         </div>
+        <div style={{ borderTop: "2px solid #444" }}>
+          <h3>Ports</h3>
+          {Object.entries(ports).map(([key, value]) => {
+            return (
+              <div key={key} className="labelRowStyle">
+                <label htmlFor={key} className="labelStyle">
+                  {key}
+                </label>
+                <input
+                  id={key}
+                  name={key}
+                  className="styledNumInput"
+                  type="number"
+                  value={value}
+                  onChange={(e) => updatePorts(e)}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="moduleGrid">
         <div className="moduleBox">
@@ -180,6 +217,13 @@ function App() {
           <MorseCode />
         </div>
 
+        <div className="moduleBox">
+          <ComplicatedWires
+            even={serialProps.even}
+            parallel={ports.Parallel}
+            batteries={batteries.AA + batteries.D}
+          />
+        </div>
         <div className="moduleBox">
           <SimpleMaze />
         </div>
