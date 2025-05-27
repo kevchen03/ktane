@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./styling/commonStyles.css";
 import "./App.css";
-import SimpleWires from "./components/SimpleWires/SimpleWires";
-import SimpleMaze from "./components/SimpleMaze/SimpleMaze";
-import Button from "./components/Button/Button";
-import SimonSays from "./components/SimonSays/SimonSays";
-import Keypads from "./components/Keypads/Keypads";
-import WhosOnFirst from "./components/WhosOnFirst/WhosOnFirst";
+import SimpleWires from "./components/Original/SimpleWires/SimpleWires";
+import Button from "./components/Original/Button/Button";
+import Keypads from "./components/Original/Keypads/Keypads";
+import SimonSays from "./components/Original/SimonSays/SimonSays";
+import WhosOnFirst from "./components/Original/WhosOnFirst/WhosOnFirst";
+import Memory from "./components/Original/Memory/Memory";
+import MorseCode from "./components/Original/MorseCode/MorseCode";
+import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -169,7 +171,15 @@ function App() {
         <div className="moduleBox">
           <WhosOnFirst />
         </div>
-        
+
+        <div className="moduleBox">
+          <Memory />
+        </div>
+
+        <div className="moduleBox">
+          <MorseCode />
+        </div>
+
         <div className="moduleBox">
           <SimpleMaze />
         </div>

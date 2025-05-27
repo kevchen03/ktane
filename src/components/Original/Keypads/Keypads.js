@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styling/commonStyles.css";
+import "../../../styling/commonStyles.css";
 import "./Keypads.css";
 
 const Keypads = () => {

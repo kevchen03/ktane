@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import "../../styling/commonStyles.css";
+import "../../../styling/commonStyles.css";
 import holdImage from "./HoldInfo.jpg";
 
 const Button = (props) => {

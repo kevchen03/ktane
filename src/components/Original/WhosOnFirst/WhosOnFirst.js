@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styling/commonStyles.css";
+import "../../../styling/commonStyles.css";
 import "./WhosOnFirst.css";
 
 const WhosOnFirst = () => {
@@ -288,10 +288,8 @@ const WhosOnFirst = () => {
           })}
         </select>
       </div>
-      <div className="pressOrder">
-        <div className="labelStyle" style={{ marginBottom: "8px" }}>
-          Press Order:
-        </div>
+      <div className="pressOrder" style={{ textAlign: "center" }}>
+        <p>Press Order</p>
         {pressOrder.length > 0 ? (
           <div className="pressOrderList">
             {pressOrder.map((word, i) => (

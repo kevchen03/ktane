@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import "./SimpleMaze.css";
-import "../../styling/commonStyles.css";
+import "../../../styling/commonStyles.css";
 import Maze from "./Maze";
 import maze1 from "./MazeData/1.json";
 import maze2 from "./MazeData/2.json";
@@ -179,10 +179,8 @@ const SimpleMaze = () => {
       </div>
 
       {/* Directions */}
-      <div className="directions">
-        <div className="labelStyle" style={{ marginBottom: "8px" }}>
-          Directions:
-        </div>
+      <div className="directions" style={{ textAlign: "center" }}>
+        <p>Directions</p>
         {directions.length > 0 ? (
           <div className="directionBox">
             {directions.map((dir, i) => (

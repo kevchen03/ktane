@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import "../../styling/commonStyles.css";
+import "../../../styling/commonStyles.css";
 import "./SimpleWires.css";
 
 const SimpleWires = (props) => {

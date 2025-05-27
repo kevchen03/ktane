@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styling/commonStyles.css';
+import '../../../styling/commonStyles.css';
 import vowels0 from './rules/Vowel0.jpg';
 import vowels1 from './rules/Vowel1.jpg';
 import vowels2 from './rules/Vowel2.jpg';
