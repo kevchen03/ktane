@@ -5,7 +5,7 @@ import "./SimpleWires.css";
 const SimpleWires = (props) => {
   const { serialProps } = props;
   const [numWires, setNumWires] = useState(3);
-  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedColors, setSelectedColors] = useState([null, null, null]);
   const [response, setResponse] = useState("");
   const colorOptions = ["r", "b", "w", "k", "y"];
   const colorMap = {
@@ -16,27 +16,22 @@ const SimpleWires = (props) => {
     y: "yellow",
   };
 
-  const handleNumWireChange = (event) => {
-    const val = Number.parseInt(event.target.value);
-    if (Number.isNaN(val) || val < 3 || val > 6) return;
-    setNumWires(val);
-    resetSelection();
-  };
-
   const handleColorClick = (color) => {
-    if (selectedColors.length >= numWires || !color) return;
-
-    const newSelection = [...selectedColors, color];
+    const firstNull = selectedColors.findIndex((c) => c === null);
+    if (firstNull === -1 || !color) return;
+    const newSelection = [...selectedColors];
+    newSelection[firstNull] = color;
     setSelectedColors(newSelection);
   };
 
   const deselectWire = (i) => {
-    const updated = selectedColors.filter((_, index) => index !== i);
+    const updated = [...selectedColors];
+    updated[i] = null;
     setSelectedColors(updated);
   };
 
-  const resetSelection = () => {
-    setSelectedColors([]);
+  const resetSelection = (wireCount = numWires) => {
+    setSelectedColors(Array(wireCount).fill(null));
     setResponse("");
   };
 
@@ -131,8 +126,24 @@ const SimpleWires = (props) => {
     [numWires, serialProps]
   );
 
+  const handleNumWireChange = (event) => {
+    const val = Number.parseInt(event.target.value);
+    if (Number.isNaN(val) || val < 3 || val > 6) return;
+    setNumWires(val);
+    const newSelection = [...selectedColors];
+    while (newSelection.length !== val) {
+      if (newSelection.length < val) {
+        newSelection.push(null);
+      } else {
+        newSelection.pop();
+      }
+    };
+    setSelectedColors(newSelection);
+    setResponse("");
+  };
+
   useEffect(() => {
-    if (selectedColors.length === numWires) {
+    if (selectedColors.every((c) => c !== null)) {
       runWireLogic(selectedColors);
     } else {
       setResponse("");
@@ -166,7 +177,7 @@ const SimpleWires = (props) => {
               key={color}
               className="colorBox"
               onClick={() => handleColorClick(color)}
-              disabled={selectedColors.length >= numWires}
+              disabled={selectedColors.every((c) => c)}
               style={{
                 backgroundColor: colorMap[color],
                 color: textColor,
@@ -179,21 +190,22 @@ const SimpleWires = (props) => {
       </div>
 
       {/* Selected color wires */}
-      <div>
-        <p>Selected:</p>
+      <div className="selectedColorsArea">
+        <p>Selected</p>
         <div className="selectedColors">
           {selectedColors.map((color, i) => {
             const wireToCut = getWireToCut();
             const isTarget = i === wireToCut;
+            const selected = color !== null;
             return (
               <div
                 key={i}
                 style={{
                   width: "30px",
                   height: "30px",
-                  backgroundColor: colorMap[color],
-                  border: isTarget ? "3px solid limegreen" : "1px solid #000",
-                  boxShadow: isTarget ? "0 0 10px limegreen" : "none",
+                  backgroundColor: selected ? colorMap[color] : "#ddd",
+                  border: isTarget ? "3px solid limegreen" : "3px solid grey",
+                  boxShadow: "none",
                   transition: "0.01s",
                   cursor: "pointer",
                 }}
@@ -203,6 +215,7 @@ const SimpleWires = (props) => {
             );
           })}
         </div>
+        <p className="response">{response}</p>
       </div>
 
       {/* Reset button */}
@@ -214,9 +227,6 @@ const SimpleWires = (props) => {
       >
         🔁 Reset
       </button>
-
-      {/* Result */}
-      <p className="response">{response}</p>
     </div>
   );
 };
