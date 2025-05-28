@@ -8,8 +8,9 @@ import SimonSays from "./components/Original/SimonSays/SimonSays";
 import WhosOnFirst from "./components/Original/WhosOnFirst/WhosOnFirst";
 import Memory from "./components/Original/Memory/Memory";
 import MorseCode from "./components/Original/MorseCode/MorseCode";
-import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
 import ComplicatedWires from "./components/Original/ComplicatedWires/ComplicatedWires";
+import WireSequences from "./components/Original/WireSequences/WireSequences";
+import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -224,6 +225,11 @@ function App() {
             batteries={batteries.AA + batteries.D}
           />
         </div>
+
+        <div className="moduleBox">
+          <WireSequences />
+        </div>
+
         <div className="moduleBox">
           <SimpleMaze />
         </div>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../../../styling/commonStyles.css";
-import "./Memory.css";
 
 const Memory = () => {
   const [inputs, setInputs] = useState([
