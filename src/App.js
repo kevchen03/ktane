@@ -11,6 +11,7 @@ import MorseCode from "./components/Original/MorseCode/MorseCode";
 import ComplicatedWires from "./components/Original/ComplicatedWires/ComplicatedWires";
 import WireSequences from "./components/Original/WireSequences/WireSequences";
 import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
+import Passwords from "./components/Original/Passwords/Passwords";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -232,6 +233,10 @@ function App() {
 
         <div className="moduleBox">
           <SimpleMaze />
+        </div>
+
+        <div className="moduleBox">
+          <Passwords />
         </div>
       </div>
     </div>
