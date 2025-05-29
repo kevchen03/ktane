@@ -12,6 +12,7 @@ import ComplicatedWires from "./components/Original/ComplicatedWires/Complicated
 import WireSequences from "./components/Original/WireSequences/WireSequences";
 import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
 import Passwords from "./components/Original/Passwords/Passwords";
+import Knobs from "./components/Original/Knobs/Knobs";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -237,6 +238,10 @@ function App() {
 
         <div className="moduleBox">
           <Passwords />
+        </div>
+
+        <div className="moduleBox">
+          <Knobs />
         </div>
       </div>
     </div>
