@@ -19,8 +19,17 @@ function App() {
   const [strikes, setStrikes] = useState(0);
   const [serialProps, setSerialProps] = useState({ even: false, vowel: false });
   const [litIndicators, setLitIndicators] = useState({
+    BOB: null,
     CAR: null,
+    CLR: null,
     FRK: null,
+    FRQ: null,
+    IND: null,
+    MSA: null,
+    NSA: null,
+    SIG: null,
+    SND: null,
+    TRN: null,
   });
   const [batteries, setBatteries] = useState({
     AA: 0,
@@ -81,110 +90,138 @@ function App() {
     setPorts(newBatteries);
   };
 
+  const reset = () => {
+    updateSerial("");
+    setStrikes(0);
+    setLitIndicators(
+      Object.fromEntries(
+        Object.keys(litIndicators).map((key) => {
+          return [key, null];
+        })
+      )
+    );
+    setBatteries({ AA: 0, D: 0 });
+    setPorts(
+      Object.fromEntries(
+        Object.keys(ports).map((key) => {
+          return [key, 0];
+        })
+      )
+    )
+  };
+
   return (
     <div className="appLayout">
       <div className="sidebar">
-        <div className="labelRowStyle">
-          <label htmlFor="serial" className="labelStyle">
-            Serial Number:
-          </label>
-          <input
-            id="serial"
-            type="text"
-            value={serial}
-            onChange={(e) => updateSerial(e.target.value)}
-            maxLength={6} // <-- Add maxLength to restrict input to 6 characters
-            className="styledTextInput"
-          />
-        </div>
-        <div className="labelRowStyle">
-          <label htmlFor="strikes" className="labelStyle">
-            Strikes:
-          </label>
-          <input
-            id="strikes"
-            type="number"
-            value={strikes}
-            onChange={(e) => updateStrikes(e.target.value)}
-            className="styledNumInput"
-          />
-        </div>
-        <div
-          style={{
-            borderTop: "2px solid #444",
-          }}
-        >
-          <h3>Lit Indicators</h3>
-          {Object.entries(litIndicators).map(([key, value]) => (
-            <div key={key} className="labelRowStyle">
-              <label className="labelStyle">{key}</label>
-              <div style={{ display: "flex", gap: "8px" }}>
-                {[
-                  { label: "DNE", val: null },
-                  { label: "Unlit", val: false },
-                  { label: "Lit", val: true },
-                ].map(({ label, val }) => (
-                  <button
-                    className="litIndicator"
-                    key={label}
-                    onClick={() =>
-                      setLitIndicators((prev) => ({ ...prev, [key]: val }))
-                    }
-                    style={{
-                      backgroundColor: value === val ? "#007bff" : "#f0f0f0",
-                      color: value === val ? "#fff" : "#000",
-                    }}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div
-          style={{
-            borderTop: "2px solid #444",
-          }}
-        >
-          <h3>Batteries</h3>
-          {Object.entries(batteries).map(([key, value]) => {
-            return (
+        <div className="sidebarContent">
+          <div className="labelRowStyle">
+            <label htmlFor="serial" className="labelStyle">
+              Serial Number:
+            </label>
+            <input
+              id="serial"
+              type="text"
+              value={serial}
+              onChange={(e) => updateSerial(e.target.value)}
+              maxLength={6} // <-- Add maxLength to restrict input to 6 characters
+              className="styledTextInput"
+            />
+          </div>
+          <div className="labelRowStyle">
+            <label htmlFor="strikes" className="labelStyle">
+              Strikes:
+            </label>
+            <input
+              id="strikes"
+              type="number"
+              value={strikes}
+              onChange={(e) => updateStrikes(e.target.value)}
+              className="styledNumInput"
+            />
+          </div>
+          <div
+            style={{
+              borderTop: "2px solid #444",
+            }}
+          >
+            <h3>Lit Indicators</h3>
+            {Object.entries(litIndicators).map(([key, value]) => (
               <div key={key} className="labelRowStyle">
-                <label htmlFor={key} className="labelStyle">
-                  {key}
-                </label>
-                <input
-                  id={key}
-                  name={key}
-                  className="styledNumInput"
-                  type="number"
-                  value={value}
-                  onChange={(e) => updateBatteries(e)}
-                />
+                <label className="labelStyle">{key}</label>
+                <div style={{ display: "flex", gap: "8px" }}>
+                  {[
+                    { label: "DNE", val: null },
+                    { label: "Unlit", val: false },
+                    { label: "Lit", val: true },
+                  ].map(({ label, val }) => (
+                    <button
+                      className="litIndicator"
+                      key={label}
+                      onClick={() =>
+                        setLitIndicators((prev) => ({ ...prev, [key]: val }))
+                      }
+                      style={{
+                        backgroundColor: value === val ? "#007bff" : "#f0f0f0",
+                        color: value === val ? "#fff" : "#000",
+                      }}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
+          <div
+            style={{
+              borderTop: "2px solid #444",
+            }}
+          >
+            <h3>Batteries</h3>
+            {Object.entries(batteries).map(([key, value]) => {
+              return (
+                <div key={key} className="labelRowStyle">
+                  <label htmlFor={key} className="labelStyle">
+                    {key}
+                  </label>
+                  <input
+                    id={key}
+                    name={key}
+                    className="styledNumInput"
+                    type="number"
+                    value={value}
+                    onChange={(e) => updateBatteries(e)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          <div style={{ borderTop: "2px solid #444" }}>
+            <h3>Ports</h3>
+            {Object.entries(ports).map(([key, value]) => {
+              return (
+                <div key={key} className="labelRowStyle">
+                  <label htmlFor={key} className="labelStyle">
+                    {key}
+                  </label>
+                  <input
+                    id={key}
+                    name={key}
+                    className="styledNumInput"
+                    type="number"
+                    value={value}
+                    onChange={(e) => updatePorts(e)}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <div style={{ borderTop: "2px solid #444" }}>
-          <h3>Ports</h3>
-          {Object.entries(ports).map(([key, value]) => {
-            return (
-              <div key={key} className="labelRowStyle">
-                <label htmlFor={key} className="labelStyle">
-                  {key}
-                </label>
-                <input
-                  id={key}
-                  name={key}
-                  className="styledNumInput"
-                  type="number"
-                  value={value}
-                  onChange={(e) => updatePorts(e)}
-                />
-              </div>
-            );
-          })}
+        {/* Reset button here */}
+        <div className="sidebarReset">
+          <button onClick={reset} className="resetButton">
+            🔁 Reset
+          </button>
         </div>
       </div>
       <div className="moduleGrid">
