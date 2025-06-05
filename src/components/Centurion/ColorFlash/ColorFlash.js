@@ -53,7 +53,7 @@ const ColorFlash = () => {
           }
         }
         setResponse({
-          position: null,
+          position: -1,
           button: null,
           message: "This pattern is unknown!",
         });
@@ -107,7 +107,7 @@ const ColorFlash = () => {
           }
         }
         setResponse({
-          position: null,
+          position: -1,
           button: null,
           message: "This pattern is unknown!",
         });
@@ -149,7 +149,7 @@ const ColorFlash = () => {
           }
         }
         setResponse({
-          position: null,
+          position: -1,
           button: null,
           message: "This pattern is unknown!",
         });
@@ -200,7 +200,7 @@ const ColorFlash = () => {
         );
         if (greenIndex === -1) {
           setResponse({
-            position: null,
+            position: -1,
             button: null,
             message: "This pattern is unknown!",
           });
@@ -245,7 +245,7 @@ const ColorFlash = () => {
           }
         }
         setResponse({
-          position: null,
+          position: -1,
           button: null,
           message: "This pattern is unknown!",
         });
@@ -587,7 +587,7 @@ const ColorFlash = () => {
       <div
         style={{
           textAlign: "center",
-          color: response.position === null ? "red" : "green",
+          color: response.position === null || response.position === -1 ? "red" : "green",
           marginTop: "-8px",
         }}
       >
