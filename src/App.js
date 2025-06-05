@@ -13,6 +13,7 @@ import WireSequences from "./components/Original/WireSequences/WireSequences";
 import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
 import Passwords from "./components/Original/Passwords/Passwords";
 import Knobs from "./components/Original/Knobs/Knobs";
+import ColorFlash from "./components/Centurion/ColorFlash/ColorFlash";
 
 function App() {
   const [serial, setSerial] = useState("");
@@ -279,6 +280,10 @@ function App() {
 
         <div className="moduleBox">
           <Knobs />
+        </div>
+
+        <div className="moduleBox">
+          <ColorFlash />
         </div>
       </div>
     </div>

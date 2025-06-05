@@ -200,14 +200,10 @@ const SimpleWires = (props) => {
             return (
               <div
                 key={i}
+                className="selectedColorBox"
                 style={{
-                  width: "30px",
-                  height: "30px",
                   backgroundColor: selected ? colorMap[color] : "#ddd",
                   border: isTarget ? "3px solid limegreen" : "3px solid grey",
-                  boxShadow: "none",
-                  transition: "0.01s",
-                  cursor: "pointer",
                 }}
                 title={`Wire ${i + 1}`}
                 onClick={() => deselectWire(i)}
