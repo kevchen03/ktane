@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Box } from "@mui/material";
-
 import TopBar from "./components/TopBar";
 import KeyInfoSidebar from "./components/KeyInfoSidebar";
 import ModuleGrid from "./components/ModuleGrid";
@@ -8,7 +7,7 @@ import ModuleMenu from "./components/ModuleMenu";
 
 function App() {
   const [modules, setModules] = useState([]);
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const addModule = (type) => {
     setModules((prev) => [
@@ -28,30 +27,28 @@ function App() {
     <Box
       sx={{
         height: "100vh",
-        display: "grid",
-        gridTemplateRows: "64px 1fr",
+        display: "flex",
+        flexDirection: "column",
         overflow: "hidden",
       }}
     >
-      <TopBar onToggleMenu={() => setMenuOpen((prev) => !prev)} />
+      <TopBar onMenuToggle={() => setMenuOpen((prev) => !prev)} />
       <Box
         sx={{
+          display: "flex",
+          flex: 1,
           minHeight: 0,
-          display: "grid",
-          gridTemplateColumns: menuOpen
-            ? "260px minmax(0, 1fr) 280px"
-            : "260px minmax(0, 1fr) 48px",
-          transition: "grid-template-columns 200ms ease",
+          overflow: "hidden",
         }}
       >
         <KeyInfoSidebar />
         <ModuleGrid modules={modules} onRemoveModule={removeModule} />
-        <ModuleMenu
-          open={menuOpen}
-          onToggle={() => setMenuOpen((prev) => !prev)}
-          onAddModule={addModule}
-        />
       </Box>
+      <ModuleMenu
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onAddModule={addModule}
+      />
     </Box>
   );
 }

@@ -2,95 +2,83 @@ import { useMemo, useState } from "react";
 import {
   Box,
   Divider,
+  Drawer,
   IconButton,
   InputAdornment,
   List,
   ListItemButton,
   ListItemText,
   TextField,
-  Tooltip,
   Typography,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { moduleRegistry } from "../modules/moduleRegistry";
+import moduleRegistry from "../modules/moduleRegistry";
 
-function ModuleMenu({ open, onToggle, onAddModule }) {
+const DRAWER_WIDTH = 320;
+
+function ModuleMenu({ open, onClose, onAddModule }) {
   const [search, setSearch] = useState("");
 
   const filteredModules = useMemo(() => {
-    const query = search.toLowerCase().trim();
+    const query = search.trim().toLowerCase();
+    if (!query) {
+      return Object.entries(moduleRegistry);
+    }
 
     return Object.entries(moduleRegistry).filter(([, module]) =>
       module.name.toLowerCase().includes(query),
     );
   }, [search]);
 
-  if (!open) {
-    return (
-      <Box
-        sx={{
-          borderLeft: 1,
-          borderColor: "divider",
-          display: "flex",
-          justifyContent: "center",
-          pt: 1,
-        }}
-      >
-        <Tooltip title="Open module menu" placement="left">
-          <IconButton onClick={onToggle}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </Tooltip>
-      </Box>
-    );
-  }
+  const handleAddModule = (type) => {
+    onAddModule(type);
+  };
 
   return (
-    <Box
-      sx={{
-        borderLeft: 1,
-        borderColor: "divider",
-        display: "flex",
-        flexDirection: "column",
-        minHeight: 0,
-        bgcolor: "background.paper",
+    <Drawer
+      anchor="right"
+      open={open}
+      onClose={onClose}
+      variant="temporary"
+      ModalProps={{
+        keepMounted: true,
+      }}
+      slotProps={{
+        paper: {
+          sx: {
+            width: DRAWER_WIDTH,
+            boxSizing: "border-box",
+          },
+        },
       }}
     >
       <Box
         sx={{
-          p: 2,
           display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
+          p: 2,
         }}
       >
-        <Typography
-          variant="h6"
-          sx={{
-            fontWeight: 600,
-            flexGrow: 1,
-          }}
-        >
+        <Typography variant="h6" fontWeight={600}>
           Modules
         </Typography>
 
-        <Tooltip title="Collapse module menu">
-          <IconButton onClick={onToggle}>
-            <ChevronRightIcon />
-          </IconButton>
-        </Tooltip>
+        <IconButton onClick={onClose} aria-label="Close module menu">
+          <CloseIcon />
+        </IconButton>
       </Box>
 
       <Divider />
 
-      <Box sx={{ p: 1.5 }}>
+      <Box sx={{ p: 2 }}>
         <TextField
           fullWidth
           size="small"
-          placeholder="Search modules..."
           value={search}
           onChange={(event) => setSearch(event.target.value)}
+          placeholder="Search modules..."
           slotProps={{
             input: {
               startAdornment: (
@@ -106,32 +94,30 @@ function ModuleMenu({ open, onToggle, onAddModule }) {
       <Divider />
 
       <List
-        dense
         sx={{
+          flex: 1,
           overflowY: "auto",
-          flexGrow: 1,
+          py: 0,
         }}
       >
-        {filteredModules.map(([type, module]) => (
-          <ListItemButton key={type} onClick={() => onAddModule(type)}>
-            <ListItemText primary={module.name} />
-          </ListItemButton>
-        ))}
-
-        {filteredModules.length === 0 && (
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            sx={{
-              p: 2,
-              textAlign: "center",
-            }}
-          >
-            No modules found
-          </Typography>
+        {filteredModules.length === 0 ? (
+          <Box sx={{ p: 2 }}>
+            <Typography variant="body2" color="text.secondary">
+              No modules found.
+            </Typography>
+          </Box>
+        ) : (
+          filteredModules.map(([type, module]) => (
+            <ListItemButton key={type} onClick={() => handleAddModule(type)}>
+              <ListItemText
+                primary={module.name}
+                secondary={module.description}
+              />
+            </ListItemButton>
+          ))
         )}
       </List>
-    </Box>
+    </Drawer>
   );
 }
 

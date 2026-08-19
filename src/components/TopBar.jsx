@@ -1,23 +1,16 @@
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
-
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-function TopBar({ onToggleMenu }) {
+function TopBar({ onMenuToggle }) {
   return (
-    <AppBar
-      position="static"
-      elevation={1}
-      sx={{
-        zIndex: (theme) => theme.zIndex.drawer + 1,
-      }}
-    >
+    <AppBar position="static" elevation={1}>
       <Toolbar>
         <Typography
           variant="h6"
           component="div"
           sx={{
-            fontWeight: 700,
             flexGrow: 1,
+            fontWeight: 600,
           }}
         >
           KTANE
@@ -25,8 +18,8 @@ function TopBar({ onToggleMenu }) {
 
         <IconButton
           color="inherit"
-          onClick={onToggleMenu}
-          aria-label="toggle module menu"
+          onClick={onMenuToggle}
+          aria-label="Open module menu"
         >
           <MenuIcon />
         </IconButton>
