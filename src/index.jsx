@@ -1,11 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { CssBaseline } from "@mui/material";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import App from "./App2";
+import KeyInfoProvider from "./context/KeyInfoContext";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <CssBaseline />
+
+    <KeyInfoProvider>
+      <App />
+    </KeyInfoProvider>
   </React.StrictMode>
 );
