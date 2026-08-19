@@ -7,7 +7,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import holdImage from "./HoldInfo.jpg";
+import holdImage from "./img/HoldInfo.jpg";
 import { useKeyInfo } from "@/context/KeyInfoContext";
 
 const validColors = ["Red", "Blue", "White", "Yellow", "Black"];
