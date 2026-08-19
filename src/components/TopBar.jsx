@@ -1,12 +1,6 @@
-import {
-  AppBar,
-  Box,
-  IconButton,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 
 function TopBar({ onToggleMenu }) {
   return (

@@ -21,9 +21,7 @@ function App() {
   };
 
   const removeModule = (id) => {
-    setModules((prev) =>
-      prev.filter((module) => module.id !== id)
-    );
+    setModules((prev) => prev.filter((module) => module.id !== id));
   };
 
   return (
@@ -35,37 +33,22 @@ function App() {
         overflow: "hidden",
       }}
     >
-      <TopBar
-        onToggleMenu={() =>
-          setMenuOpen((prev) => !prev)
-        }
-      />
-
+      <TopBar onToggleMenu={() => setMenuOpen((prev) => !prev)} />
       <Box
         sx={{
           minHeight: 0,
-
           display: "grid",
-
           gridTemplateColumns: menuOpen
             ? "260px minmax(0, 1fr) 280px"
             : "260px minmax(0, 1fr) 48px",
-
           transition: "grid-template-columns 200ms ease",
         }}
       >
         <KeyInfoSidebar />
-
-        <ModuleGrid
-          modules={modules}
-          onRemoveModule={removeModule}
-        />
-
+        <ModuleGrid modules={modules} onRemoveModule={removeModule} />
         <ModuleMenu
           open={menuOpen}
-          onToggle={() =>
-            setMenuOpen((prev) => !prev)
-          }
+          onToggle={() => setMenuOpen((prev) => !prev)}
           onAddModule={addModule}
         />
       </Box>

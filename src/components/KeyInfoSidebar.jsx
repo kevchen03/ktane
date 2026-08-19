@@ -8,10 +8,8 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-
 import { useKeyInfo } from "../context/KeyInfoContext";
 
 function Counter({ label, value, onChange }) {
@@ -109,25 +107,25 @@ function IndicatorControl({ indicator, value, onChange }) {
             fontSize: "0.7rem",
             textTransform: "none",
           },
-
-          "& .MuiToggleButton-root[value='lit'].Mui-selected": {
-            color: "success.main",
-            backgroundColor: "success.light",
-          },
-
-          "& .MuiToggleButton-root[value='unlit'].Mui-selected": {
-            color: "text.secondary",
-          },
-
           "& .MuiToggleButton-root[value='na'].Mui-selected": {
-            color: "text.secondary",
+            color: "#424242",
+            backgroundColor: "#eeeeee",
+            borderColor: "#757575",
+          },
+          "& .MuiToggleButton-root[value='unlit'].Mui-selected": {
+            color: "#7a4f01",
+            backgroundColor: "#fff0b3",
+            borderColor: "#d6a700",
+          },
+          "& .MuiToggleButton-root[value='lit'].Mui-selected": {
+            color: "#1b5e20",
+            backgroundColor: "#c8e6c9",
+            borderColor: "#43a047",
           },
         }}
       >
         <ToggleButton value="na">N/A</ToggleButton>
-
         <ToggleButton value="unlit">Unlit</ToggleButton>
-
         <ToggleButton value="lit">Lit</ToggleButton>
       </ToggleButtonGroup>
     </Box>
@@ -157,7 +155,6 @@ function KeyInfoSidebar() {
     if (!Object.hasOwn(litIndicators, indicator)) {
       return null;
     }
-
     return litIndicators[indicator];
   };
 
@@ -171,7 +168,6 @@ function KeyInfoSidebar() {
         bgcolor: "background.paper",
       }}
     >
-      {/* Header */}
       <Box sx={{ p: 2 }}>
         <Typography variant="h6" fontWeight={600}>
           Key Info
@@ -180,7 +176,6 @@ function KeyInfoSidebar() {
 
       <Divider />
 
-      {/* Serial Number */}
       <Box sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>
           Serial Number
@@ -202,7 +197,6 @@ function KeyInfoSidebar() {
 
       <Divider />
 
-      {/* Strikes */}
       <Box sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>
           Strikes
@@ -213,7 +207,6 @@ function KeyInfoSidebar() {
 
       <Divider />
 
-      {/* Batteries */}
       <Box sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>
           Batteries
@@ -234,7 +227,6 @@ function KeyInfoSidebar() {
 
       <Divider />
 
-      {/* Ports */}
       <Box sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>
           Ports
@@ -252,7 +244,6 @@ function KeyInfoSidebar() {
 
       <Divider />
 
-      {/* Indicators */}
       <Box sx={{ p: 2 }}>
         <Typography variant="subtitle2" gutterBottom>
           Indicators

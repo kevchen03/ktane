@@ -1,5 +1,4 @@
-import { useMemo, useState } from 'react';
-
+import { useMemo, useState } from "react";
 import {
   Box,
   Divider,
@@ -11,27 +10,20 @@ import {
   TextField,
   Tooltip,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { moduleRegistry } from "../modules/moduleRegistry";
 
-import SearchIcon from '@mui/icons-material/Search';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
-import { moduleRegistry } from '../modules/moduleRegistry';
-
-function ModuleMenu({
-  open,
-  onToggle,
-  onAddModule,
-}) {
-  const [search, setSearch] = useState('');
+function ModuleMenu({ open, onToggle, onAddModule }) {
+  const [search, setSearch] = useState("");
 
   const filteredModules = useMemo(() => {
     const query = search.toLowerCase().trim();
 
-    return Object.entries(moduleRegistry).filter(
-      ([, module]) =>
-        module.name.toLowerCase().includes(query)
+    return Object.entries(moduleRegistry).filter(([, module]) =>
+      module.name.toLowerCase().includes(query),
     );
   }, [search]);
 
@@ -40,9 +32,9 @@ function ModuleMenu({
       <Box
         sx={{
           borderLeft: 1,
-          borderColor: 'divider',
-          display: 'flex',
-          justifyContent: 'center',
+          borderColor: "divider",
+          display: "flex",
+          justifyContent: "center",
           pt: 1,
         }}
       >
@@ -59,18 +51,18 @@ function ModuleMenu({
     <Box
       sx={{
         borderLeft: 1,
-        borderColor: 'divider',
-        display: 'flex',
-        flexDirection: 'column',
+        borderColor: "divider",
+        display: "flex",
+        flexDirection: "column",
         minHeight: 0,
-        bgcolor: 'background.paper',
+        bgcolor: "background.paper",
       }}
     >
       <Box
         sx={{
           p: 2,
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <Typography
@@ -98,9 +90,7 @@ function ModuleMenu({
           size="small"
           placeholder="Search modules..."
           value={search}
-          onChange={(event) =>
-            setSearch(event.target.value)
-          }
+          onChange={(event) => setSearch(event.target.value)}
           slotProps={{
             input: {
               startAdornment: (
@@ -118,18 +108,13 @@ function ModuleMenu({
       <List
         dense
         sx={{
-          overflowY: 'auto',
+          overflowY: "auto",
           flexGrow: 1,
         }}
       >
         {filteredModules.map(([type, module]) => (
-          <ListItemButton
-            key={type}
-            onClick={() => onAddModule(type)}
-          >
-            <ListItemText
-              primary={module.name}
-            />
+          <ListItemButton key={type} onClick={() => onAddModule(type)}>
+            <ListItemText primary={module.name} />
           </ListItemButton>
         ))}
 
@@ -139,7 +124,7 @@ function ModuleMenu({
             color="text.secondary"
             sx={{
               p: 2,
-              textAlign: 'center',
+              textAlign: "center",
             }}
           >
             No modules found
