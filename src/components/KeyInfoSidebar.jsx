@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useKeyInfo } from "../context/KeyInfoContext";
+import { useKeyInfo } from "@/context/KeyInfoContext";
 
 function Counter({ label, value, onChange }) {
   return (

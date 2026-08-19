@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import holdImage from "./HoldInfo.jpg";
-import { useKeyInfo } from "../../../context/KeyInfoContext";
+import { useKeyInfo } from "@/context/KeyInfoContext";
 
 const validColors = ["Red", "Blue", "White", "Yellow", "Black"];
 const validLabels = ["Abort", "Detonate", "Hold", "Press"];

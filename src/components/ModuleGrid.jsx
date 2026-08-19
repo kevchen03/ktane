@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Box, IconButton, Paper, Tooltip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import moduleRegistry from "../modules/moduleRegistry";
+import moduleRegistry from "@/modules/moduleRegistry";
 
 const MIN_MODULE_WIDTH = 320;
 const MODULE_HEIGHT = 500;
