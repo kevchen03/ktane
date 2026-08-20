@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import "./styling/commonStyles.css";
+import "./OriginalApp/styling/commonStyles.css";
 import "./App.css";
-import SimpleWires from "./components/Original/SimpleWires/SimpleWires";
-import Button from "./components/Original/Button/Button";
-import Keypads from "./components/Original/Keypads/Keypads";
-import SimonSays from "./components/Original/SimonSays/SimonSays";
-import WhosOnFirst from "./components/Original/WhosOnFirst/WhosOnFirst";
-import Memory from "./components/Original/Memory/Memory";
-import MorseCode from "./components/Original/MorseCode/MorseCode";
-import ComplicatedWires from "./components/Original/ComplicatedWires/ComplicatedWires";
-import WireSequences from "./components/Original/WireSequences/WireSequences";
-import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
-import Passwords from "./components/Original/Passwords/Passwords";
-import Knobs from "./components/Original/Knobs/Knobs";
-import ColorFlash from "./components/Centurion/ColorFlash/ColorFlash";
+import SimpleWires from "./OriginalApp/components/Original/SimpleWires/SimpleWires";
+import Button from "./OriginalApp/components/Original/Button/Button";
+import Keypads from "./OriginalApp/components/Original/Keypads/Keypads";
+import SimonSays from "./OriginalApp/components/Original/SimonSays/SimonSays";
+import WhosOnFirst from "./OriginalApp/components/Original/WhosOnFirst/WhosOnFirst";
+import Memory from "./OriginalApp/components/Original/Memory/Memory";
+import MorseCode from "./OriginalApp/components/Original/MorseCode/MorseCode";
+import ComplicatedWires from "./OriginalApp/components/Original/ComplicatedWires/ComplicatedWires";
+import WireSequences from "./OriginalApp/components/Original/WireSequences/WireSequences";
+import SimpleMaze from "./OriginalApp/components/Original/SimpleMaze/SimpleMaze";
+import Passwords from "./OriginalApp/components/Original/Passwords/Passwords";
+import Knobs from "./OriginalApp/components/Original/Knobs/Knobs";
+import ColorFlash from "./OriginalApp/components/Centurion/ColorFlash/ColorFlash";
 
 function App() {
   const [serial, setSerial] = useState("");
