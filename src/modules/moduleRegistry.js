@@ -2,6 +2,7 @@ import Button from "./vanilla/Button";
 import ComplicatedWires from "./vanilla/ComplicatedWires";
 import Keypads from "./vanilla/Keypads";
 import Knobs from "./vanilla/Knobs";
+import Memory from "./vanilla/Memory";
 
 const moduleRegistry = {
   button: {
@@ -19,6 +20,10 @@ const moduleRegistry = {
   knobs: {
     name: "Knobs",
     component: Knobs,
+  },
+  memory: {
+    name: "Memory",
+    component: Memory,
   },
 };
 
