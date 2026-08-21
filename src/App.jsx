@@ -6,7 +6,6 @@ import SimonSays from "./OriginalApp/components/Original/SimonSays/SimonSays";
 import WhosOnFirst from "./OriginalApp/components/Original/WhosOnFirst/WhosOnFirst";
 import WireSequences from "./OriginalApp/components/Original/WireSequences/WireSequences";
 import SimpleMaze from "./OriginalApp/components/Original/SimpleMaze/SimpleMaze";
-import Passwords from "./OriginalApp/components/Original/Passwords/Passwords";
 import ColorFlash from "./OriginalApp/components/Centurion/ColorFlash/ColorFlash";
 
 function App() {
@@ -238,10 +237,6 @@ function App() {
 
         <div className="moduleBox">
           <SimpleMaze />
-        </div>
-
-        <div className="moduleBox">
-          <Passwords />
         </div>
 
         <div className="moduleBox">
