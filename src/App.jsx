@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./OriginalApp/styling/commonStyles.css";
 import "./App.css";
 import SimpleWires from "./OriginalApp/components/Original/SimpleWires/SimpleWires";
-import SimonSays from "./OriginalApp/components/Original/SimonSays/SimonSays";
 import WhosOnFirst from "./OriginalApp/components/Original/WhosOnFirst/WhosOnFirst";
 import WireSequences from "./OriginalApp/components/Original/WireSequences/WireSequences";
 import SimpleMaze from "./OriginalApp/components/Original/SimpleMaze/SimpleMaze";
@@ -221,10 +220,6 @@ function App() {
       <div className="moduleGrid">
         <div className="moduleBox">
           <SimpleWires serialProps={serialProps} />
-        </div>
-
-        <div className="moduleBox">
-          <SimonSays serialProps={serialProps} strikes={strikes} />
         </div>
 
         <div className="moduleBox">

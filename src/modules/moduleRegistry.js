@@ -5,6 +5,7 @@ import Knobs from "./vanilla/Knobs";
 import Memory from "./vanilla/Memory";
 import MorseCode from "./vanilla/MorseCode";
 import Passwords from "./vanilla/Passwords";
+import SimonSays from "./vanilla/SimonSays";
 
 const moduleRegistry = {
   button: {
@@ -34,6 +35,10 @@ const moduleRegistry = {
   passwords: {
     name: "Passwords",
     component: Passwords,
+  },
+  simonSays: {
+    name: "Simon Says",
+    component: SimonSays,
   },
 };
 
