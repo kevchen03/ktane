@@ -2,17 +2,12 @@ import React, { useState } from "react";
 import "./OriginalApp/styling/commonStyles.css";
 import "./App.css";
 import SimpleWires from "./OriginalApp/components/Original/SimpleWires/SimpleWires";
-import Button from "./OriginalApp/components/Original/Button/Button";
-import Keypads from "./OriginalApp/components/Original/Keypads/Keypads";
 import SimonSays from "./OriginalApp/components/Original/SimonSays/SimonSays";
 import WhosOnFirst from "./OriginalApp/components/Original/WhosOnFirst/WhosOnFirst";
-import Memory from "./OriginalApp/components/Original/Memory/Memory";
 import MorseCode from "./OriginalApp/components/Original/MorseCode/MorseCode";
-import ComplicatedWires from "./OriginalApp/components/Original/ComplicatedWires/ComplicatedWires";
 import WireSequences from "./OriginalApp/components/Original/WireSequences/WireSequences";
 import SimpleMaze from "./OriginalApp/components/Original/SimpleMaze/SimpleMaze";
 import Passwords from "./OriginalApp/components/Original/Passwords/Passwords";
-import Knobs from "./OriginalApp/components/Original/Knobs/Knobs";
 import ColorFlash from "./OriginalApp/components/Centurion/ColorFlash/ColorFlash";
 
 function App() {
@@ -231,18 +226,6 @@ function App() {
         </div>
 
         <div className="moduleBox">
-          <Button
-            CAR={litIndicators.CAR}
-            FRK={litIndicators.FRK}
-            batteries={batteries.AA + batteries.D}
-          />
-        </div>
-
-        <div className="moduleBox">
-          <Keypads />
-        </div>
-
-        <div className="moduleBox">
           <SimonSays serialProps={serialProps} strikes={strikes} />
         </div>
 
@@ -251,19 +234,7 @@ function App() {
         </div>
 
         <div className="moduleBox">
-          <Memory />
-        </div>
-
-        <div className="moduleBox">
           <MorseCode />
-        </div>
-
-        <div className="moduleBox">
-          <ComplicatedWires
-            even={serialProps.even}
-            parallel={ports.Parallel}
-            batteries={batteries.AA + batteries.D}
-          />
         </div>
 
         <div className="moduleBox">
@@ -276,10 +247,6 @@ function App() {
 
         <div className="moduleBox">
           <Passwords />
-        </div>
-
-        <div className="moduleBox">
-          <Knobs />
         </div>
 
         <div className="moduleBox">
