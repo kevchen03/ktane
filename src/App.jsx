@@ -4,7 +4,6 @@ import "./App.css";
 import SimpleWires from "./OriginalApp/components/Original/SimpleWires/SimpleWires";
 import WhosOnFirst from "./OriginalApp/components/Original/WhosOnFirst/WhosOnFirst";
 import WireSequences from "./OriginalApp/components/Original/WireSequences/WireSequences";
-import SimpleMaze from "./OriginalApp/components/Original/SimpleMaze/SimpleMaze";
 import ColorFlash from "./OriginalApp/components/Centurion/ColorFlash/ColorFlash";
 
 function App() {
@@ -228,10 +227,6 @@ function App() {
 
         <div className="moduleBox">
           <WireSequences />
-        </div>
-
-        <div className="moduleBox">
-          <SimpleMaze />
         </div>
 
         <div className="moduleBox">
