@@ -9,6 +9,7 @@ import Passwords from "./vanilla/Passwords";
 import SimonSays from "./vanilla/SimonSays";
 import WhosOnFirst from "./vanilla/WhosOnFirst";
 import Wires from "./vanilla/Wires";
+import WireSequences from "./vanilla/WireSequences";
 
 const moduleRegistry = {
   button: {
@@ -54,7 +55,11 @@ const moduleRegistry = {
   wires: {
     name: "Wires",
     component: Wires,
-  }
+  },
+  wireSequences: {
+    name: "Wire Sequences",
+    component: WireSequences,
+  },
 };
 
 export default moduleRegistry;

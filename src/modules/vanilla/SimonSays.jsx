@@ -15,7 +15,7 @@ import noVowels1 from "./img/SimonSays/NoVowel1.jpg";
 import noVowels2 from "./img/SimonSays/NoVowel2.jpg";
 import { useKeyInfo } from "@/context/KeyInfoContext";
 
-const SimonSays = () => {
+function SimonSays() {
   const { serialProps, strikes } = useKeyInfo();
 
   const rules = {
