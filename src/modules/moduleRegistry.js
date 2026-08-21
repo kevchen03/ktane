@@ -7,6 +7,7 @@ import Memory from "./vanilla/Memory";
 import MorseCode from "./vanilla/MorseCode";
 import Passwords from "./vanilla/Passwords";
 import SimonSays from "./vanilla/SimonSays";
+import WhosOnFirst from "./vanilla/WhosOnFirst";
 import Wires from "./vanilla/Wires";
 
 const moduleRegistry = {
@@ -45,6 +46,10 @@ const moduleRegistry = {
   simonSays: {
     name: "Simon Says",
     component: SimonSays,
+  },
+  whosOnFirst: {
+    name: "Who's on First",
+    component: WhosOnFirst,
   },
   wires: {
     name: "Wires",
