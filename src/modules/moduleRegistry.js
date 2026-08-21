@@ -2,11 +2,12 @@ import Button from "./vanilla/Button";
 import ComplicatedWires from "./vanilla/ComplicatedWires";
 import Keypads from "./vanilla/Keypads";
 import Knobs from "./vanilla/Knobs";
+import Mazes from "./vanilla/Mazes";
 import Memory from "./vanilla/Memory";
 import MorseCode from "./vanilla/MorseCode";
 import Passwords from "./vanilla/Passwords";
 import SimonSays from "./vanilla/SimonSays";
-import SimpleMaze from "./vanilla/SimpleMaze";
+import Wires from "./vanilla/Wires";
 
 const moduleRegistry = {
   button: {
@@ -25,6 +26,10 @@ const moduleRegistry = {
     name: "Knobs",
     component: Knobs,
   },
+  mazes: {
+    name: "Mazes",
+    component: Mazes,
+  },
   memory: {
     name: "Memory",
     component: Memory,
@@ -41,10 +46,10 @@ const moduleRegistry = {
     name: "Simon Says",
     component: SimonSays,
   },
-  simpleMaze: {
-    name: "Simple Maze",
-    component: SimpleMaze,
-  },
+  wires: {
+    name: "Wires",
+    component: Wires,
+  }
 };
 
 export default moduleRegistry;

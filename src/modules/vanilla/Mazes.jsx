@@ -233,7 +233,7 @@ const getDirections = (path) => {
   }, []);
 };
 
-function SimpleMaze() {
+function Mazes() {
   const [mazeChoice, setMazeChoice] = useState(0);
   const [start, setStart] = useState(null);
   const [end, setEnd] = useState(null);
@@ -302,7 +302,7 @@ function SimpleMaze() {
       }}
     >
       <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Simple Maze
+        Mazes
       </Typography>
 
       <FormControl size="small" fullWidth sx={{ mb: 2 }}>
@@ -601,4 +601,4 @@ function SimpleMaze() {
   );
 }
 
-export default SimpleMaze;
+export default Mazes;
