@@ -1,7 +1,8 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 
-function TopBar({ onMenuToggle }) {
+function TopBar({ onMenuToggle, onClearModules, hasModules }) {
   return (
     <AppBar position="static" elevation={1}>
       <Toolbar>
@@ -16,13 +17,21 @@ function TopBar({ onMenuToggle }) {
           KTANE
         </Typography>
 
-        <IconButton
+        <Button
           color="inherit"
-          onClick={onMenuToggle}
-          aria-label="Open module menu"
+          startIcon={<DeleteSweepIcon />}
+          onClick={onClearModules}
+          disabled={!hasModules}
+          sx={{
+            mr: 1,
+          }}
         >
-          <MenuIcon />
-        </IconButton>
+          Clear All
+        </Button>
+
+        <Button color="inherit" startIcon={<AddIcon />} onClick={onMenuToggle}>
+          Add Modules
+        </Button>
       </Toolbar>
     </AppBar>
   );

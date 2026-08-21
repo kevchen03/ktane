@@ -1,15 +1,22 @@
+import { useState } from "react";
 import {
   Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Divider,
   IconButton,
   TextField,
   ToggleButton,
   ToggleButtonGroup,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { useKeyInfo } from "@/context/KeyInfoContext";
 
 function Counter({ label, value, onChange }) {
@@ -133,6 +140,8 @@ function IndicatorControl({ indicator, value, onChange }) {
 }
 
 function KeyInfoSidebar() {
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
+
   const {
     serial,
     strikes,
@@ -148,6 +157,7 @@ function KeyInfoSidebar() {
     updateLitIndicator,
     updateBatteryCount,
     updatePortCount,
+    resetKeyInfo,
   } = useKeyInfo();
 
   const getIndicatorValue = (indicator) => {
@@ -157,107 +167,184 @@ function KeyInfoSidebar() {
     return litIndicators[indicator];
   };
 
+  const handleResetClick = () => {
+    setResetDialogOpen(true);
+  };
+
+  const handleConfirmReset = () => {
+    resetKeyInfo();
+    setResetDialogOpen(false);
+  };
+
+  const handleCancelReset = () => {
+    setResetDialogOpen(false);
+  };
+
   return (
-    <Box
-      sx={{
-        minHeight: 0,
-        overflowY: "auto",
-        borderRight: 1,
-        borderColor: "divider",
-        bgcolor: "background.paper",
-      }}
-    >
-      <Box sx={{ p: 2 }}>
-        <Typography variant="h6" fontWeight={600}>
-          Key Info
-        </Typography>
-      </Box>
-
-      <Divider />
-
-      <Box sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          Serial Number
-        </Typography>
-
-        <TextField
-          fullWidth
-          size="small"
-          value={serial}
-          onChange={(event) => handleSerialChange(event.target.value)}
-          placeholder="ABC123"
-          slotProps={{
-            htmlInput: {
-              maxLength: 6,
-            },
+    <>
+      <Box
+        sx={{
+          position: "relative",
+          minHeight: 0,
+          width: 280,
+          flexShrink: 0,
+          borderRight: 1,
+          borderColor: "divider",
+          bgcolor: "background.paper",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
+        }}
+      >
+        <Box
+          sx={{
+            flexShrink: 0,
+            p: 2,
           }}
-        />
+        >
+          <Typography variant="h6" fontWeight={600}>
+            Key Info
+          </Typography>
+        </Box>
+
+        <Divider />
+
+        <Box
+          sx={{
+            flex: 1,
+            minHeight: 0,
+            overflowY: "auto",
+          }}
+        >
+          <Box sx={{ p: 2 }}>
+            <Typography variant="subtitle2" gutterBottom>
+              Serial Number
+            </Typography>
+
+            <TextField
+              fullWidth
+              size="small"
+              value={serial}
+              onChange={(event) => handleSerialChange(event.target.value)}
+              placeholder="ABC123"
+              slotProps={{
+                htmlInput: {
+                  maxLength: 6,
+                },
+              }}
+            />
+          </Box>
+
+          <Divider />
+
+          <Box sx={{ p: 2 }}>
+            <Typography variant="subtitle2" gutterBottom>
+              Strikes
+            </Typography>
+
+            <Counter label="Strikes" value={strikes} onChange={setStrikes} />
+          </Box>
+
+          <Divider />
+
+          <Box sx={{ p: 2 }}>
+            <Typography variant="subtitle2" gutterBottom>
+              Batteries
+            </Typography>
+
+            <Counter
+              label="AA"
+              value={batteries.AA}
+              onChange={(value) => updateBatteryCount("AA", value)}
+            />
+
+            <Counter
+              label="D"
+              value={batteries.D}
+              onChange={(value) => updateBatteryCount("D", value)}
+            />
+          </Box>
+
+          <Divider />
+
+          <Box sx={{ p: 2 }}>
+            <Typography variant="subtitle2" gutterBottom>
+              Ports
+            </Typography>
+
+            {Object.entries(ports).map(([port, count]) => (
+              <Counter
+                key={port}
+                label={port}
+                value={count}
+                onChange={(value) => updatePortCount(port, value)}
+              />
+            ))}
+          </Box>
+
+          <Divider />
+
+          <Box sx={{ p: 2 }}>
+            <Typography variant="subtitle2" gutterBottom>
+              Indicators
+            </Typography>
+
+            {indicators.map((indicator) => (
+              <IndicatorControl
+                key={indicator}
+                indicator={indicator}
+                value={getIndicatorValue(indicator)}
+                onChange={(value) => updateLitIndicator(indicator, value)}
+              />
+            ))}
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            flexShrink: 0,
+            p: 1.5,
+            borderTop: 1,
+            borderColor: "divider",
+            bgcolor: "background.paper",
+          }}
+        >
+          <Button
+            fullWidth
+            variant="outlined"
+            color="warning"
+            startIcon={<RestartAltIcon />}
+            onClick={handleResetClick}
+          >
+            Reset Key Info
+          </Button>
+        </Box>
       </Box>
 
-      <Divider />
+      <Dialog open={resetDialogOpen} onClose={handleCancelReset}>
+        <DialogTitle>Reset Key Info?</DialogTitle>
 
-      <Box sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          Strikes
-        </Typography>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to reset all key information? This will clear
+            the serial number, strikes, indicators, batteries, and ports. This
+            action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
 
-        <Counter label="Strikes" value={strikes} onChange={setStrikes} />
-      </Box>
+        <DialogActions>
+          <Button onClick={handleCancelReset}>Cancel</Button>
 
-      <Divider />
-
-      <Box sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          Batteries
-        </Typography>
-
-        <Counter
-          label="AA"
-          value={batteries.AA}
-          onChange={(value) => updateBatteryCount("AA", value)}
-        />
-
-        <Counter
-          label="D"
-          value={batteries.D}
-          onChange={(value) => updateBatteryCount("D", value)}
-        />
-      </Box>
-
-      <Divider />
-
-      <Box sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          Ports
-        </Typography>
-
-        {Object.entries(ports).map(([port, count]) => (
-          <Counter
-            key={port}
-            label={port}
-            value={count}
-            onChange={(value) => updatePortCount(port, value)}
-          />
-        ))}
-      </Box>
-
-      <Divider />
-
-      <Box sx={{ p: 2 }}>
-        <Typography variant="subtitle2" gutterBottom>
-          Indicators
-        </Typography>
-
-        {indicators.map((indicator) => (
-          <IndicatorControl
-            key={indicator}
-            indicator={indicator}
-            value={getIndicatorValue(indicator)}
-            onChange={(value) => updateLitIndicator(indicator, value)}
-          />
-        ))}
-      </Box>
-    </Box>
+          <Button
+            onClick={handleConfirmReset}
+            color="warning"
+            variant="contained"
+          >
+            Reset
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
 
