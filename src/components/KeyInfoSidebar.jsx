@@ -135,7 +135,6 @@ function IndicatorControl({ indicator, value, onChange }) {
 function KeyInfoSidebar() {
   const {
     serial,
-    serialProps,
     strikes,
 
     indicators,
