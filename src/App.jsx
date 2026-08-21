@@ -4,7 +4,6 @@ import "./App.css";
 import SimpleWires from "./OriginalApp/components/Original/SimpleWires/SimpleWires";
 import SimonSays from "./OriginalApp/components/Original/SimonSays/SimonSays";
 import WhosOnFirst from "./OriginalApp/components/Original/WhosOnFirst/WhosOnFirst";
-import MorseCode from "./OriginalApp/components/Original/MorseCode/MorseCode";
 import WireSequences from "./OriginalApp/components/Original/WireSequences/WireSequences";
 import SimpleMaze from "./OriginalApp/components/Original/SimpleMaze/SimpleMaze";
 import Passwords from "./OriginalApp/components/Original/Passwords/Passwords";
@@ -231,10 +230,6 @@ function App() {
 
         <div className="moduleBox">
           <WhosOnFirst />
-        </div>
-
-        <div className="moduleBox">
-          <MorseCode />
         </div>
 
         <div className="moduleBox">

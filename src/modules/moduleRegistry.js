@@ -3,6 +3,7 @@ import ComplicatedWires from "./vanilla/ComplicatedWires";
 import Keypads from "./vanilla/Keypads";
 import Knobs from "./vanilla/Knobs";
 import Memory from "./vanilla/Memory";
+import MorseCode from "./vanilla/MorseCode";
 
 const moduleRegistry = {
   button: {
@@ -24,6 +25,10 @@ const moduleRegistry = {
   memory: {
     name: "Memory",
     component: Memory,
+  },
+  morseCode: {
+    name: "Morse Code",
+    component: MorseCode,
   },
 };
 
