@@ -102,10 +102,6 @@ function Passwords() {
         flexDirection: "column",
       }}
     >
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Passwords
-      </Typography>
-
       <Box
         sx={{
           display: "flex",

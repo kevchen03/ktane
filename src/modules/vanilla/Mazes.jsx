@@ -301,10 +301,6 @@ function Mazes() {
         overflow: "hidden",
       }}
     >
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Mazes
-      </Typography>
-
       <FormControl size="small" fullWidth sx={{ mb: 2 }}>
         <InputLabel>Maze Circle X,Y</InputLabel>
 

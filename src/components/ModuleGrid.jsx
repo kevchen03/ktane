@@ -13,7 +13,6 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import AddIcon from "@mui/icons-material/Add";
 import moduleRegistry from "@/modules/moduleRegistry";
 
@@ -204,71 +203,82 @@ function ModuleGrid({
               <Paper
                 key={module.id}
                 elevation={2}
-                draggable
-                onDragStart={(event) => handleDragStart(event, module.id)}
                 onDragOver={(event) => handleDragOver(event, module.id)}
                 onDragLeave={(event) => handleDragLeave(event, module.id)}
                 onDrop={(event) => handleDrop(event, module.id)}
-                onDragEnd={handleDragEnd}
                 sx={{
                   position: "relative",
                   minWidth: 0,
                   minHeight: 0,
                   width: "100%",
                   height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
                   opacity: draggedModuleId === module.id ? 0.5 : 1,
                   border: dragOverModuleId === module.id ? 2 : 0,
                   borderColor: "primary.main",
                   boxSizing: "border-box",
-                  cursor: "grab",
                   transition: "opacity 0.15s, border 0.15s",
-                  "&:active": {
-                    cursor: "grabbing",
-                  },
                 }}
               >
-                <Tooltip title="Drag to reorder">
-                  <Box
+                <Box
+                  draggable
+                  onDragStart={(event) => handleDragStart(event, module.id)}
+                  onDragEnd={handleDragEnd}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    minHeight: 40,
+                    px: 1.5,
+                    borderBottom: 1,
+                    borderColor: "divider",
+                    cursor: "grab",
+                    userSelect: "none",
+                    flexShrink: 0,
+                    "&:active": {
+                      cursor: "grabbing",
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="subtitle1"
+                    fontWeight={600}
+                    noWrap
                     sx={{
-                      position: "absolute",
-                      top: 8,
-                      left: 8,
-                      zIndex: 1,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: 28,
-                      height: 28,
-                      borderRadius: 1,
-                      bgcolor: "background.paper",
-                      boxShadow: 1,
+                      minWidth: 0,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
                     }}
                   >
-                    <DragIndicatorIcon fontSize="small" />
-                  </Box>
-                </Tooltip>
+                    {definition.name}
+                  </Typography>
 
-                <Tooltip title="Remove module">
-                  <IconButton
-                    size="small"
-                    onClick={() => handleRemoveClick(module)}
-                    sx={{
-                      position: "absolute",
-                      top: 8,
-                      right: 8,
-                      zIndex: 1,
-                      bgcolor: "background.paper",
-                      boxShadow: 1,
-                      "&:hover": {
-                        bgcolor: "background.paper",
-                      },
-                    }}
-                  >
-                    <CloseIcon fontSize="small" />
-                  </IconButton>
-                </Tooltip>
+                  <Tooltip title="Remove module">
+                    <IconButton
+                      size="small"
+                      onClick={() => handleRemoveClick(module)}
+                      onMouseDown={(event) => event.stopPropagation()}
+                      draggable={false}
+                      aria-label="Remove module"
+                      sx={{
+                        ml: 1,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
 
-                <ModuleComponent />
+                <Box
+                  sx={{
+                    flex: 1,
+                    minHeight: 0,
+                  }}
+                >
+                  <ModuleComponent />
+                </Box>
               </Paper>
             );
           })

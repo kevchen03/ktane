@@ -440,10 +440,6 @@ function WhosOnFirst() {
         overflow: "hidden",
       }}
     >
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Who's On First
-      </Typography>
-
       <Box
         sx={{
           display: "flex",

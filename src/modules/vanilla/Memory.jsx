@@ -157,10 +157,6 @@ function Memory() {
         minHeight: 0,
       }}
     >
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Memory
-      </Typography>
-
       <Table
         size="small"
         sx={{

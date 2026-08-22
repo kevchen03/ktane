@@ -78,10 +78,6 @@ function Knobs() {
         flexDirection: "column",
       }}
     >
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        (Needy) Knobs
-      </Typography>
-
       <Typography variant="body1" sx={{ mb: 1 }}>
         Left Knobs
       </Typography>

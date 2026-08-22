@@ -45,10 +45,6 @@ function Keypads() {
         flexDirection: "column",
       }}
     >
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Keypad (Symbols)
-      </Typography>
-
       <Box
         sx={{
           flex: 1,

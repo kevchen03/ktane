@@ -55,10 +55,6 @@ function ComplicatedWires() {
         flexDirection: "column",
       }}
     >
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Complicated Wires
-      </Typography>
-
       <TableContainer
         sx={{
           minWidth: 0,

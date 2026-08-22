@@ -81,10 +81,6 @@ function SimonSays() {
         overflow: "hidden",
       }}
     >
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Simon Says
-      </Typography>
-
       <Table
         size="small"
         sx={{
