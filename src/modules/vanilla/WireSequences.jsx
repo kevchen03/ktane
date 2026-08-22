@@ -21,11 +21,7 @@ function WireSequences() {
     color: "",
   });
 
-  const createPage = () => [
-    createWire(),
-    createWire(),
-    createWire(),
-  ];
+  const createPage = () => [createWire(), createWire(), createWire()];
 
   const [pages, setPages] = useState([
     createPage(),
@@ -53,7 +49,7 @@ function WireSequences() {
             [property]: wire[property] === value ? "" : value,
           };
         });
-      })
+      }),
     );
   };
 
@@ -68,10 +64,7 @@ function WireSequences() {
 
     for (let currentPage = 0; currentPage <= pageIndex; currentPage++) {
       for (let currentWire = 0; currentWire < 3; currentWire++) {
-        if (
-          currentPage === pageIndex &&
-          currentWire === wireIndex
-        ) {
+        if (currentPage === pageIndex && currentWire === wireIndex) {
           break;
         }
 
@@ -94,18 +87,10 @@ function WireSequences() {
     return rule.includes(wire.letter) ? "CUT" : "DON'T CUT";
   };
 
-  const currentRows = useMemo(
-    () => [0, 1, 2],
-    []
-  );
+  const currentRows = useMemo(() => [0, 1, 2], []);
 
   const resetSequence = () => {
-    setPages([
-      createPage(),
-      createPage(),
-      createPage(),
-      createPage(),
-    ]);
+    setPages([createPage(), createPage(), createPage(), createPage()]);
     setCurrentPage(0);
   };
 
@@ -151,9 +136,7 @@ function WireSequences() {
       minWidth: 0,
       flex: 1,
       color: colorInfo.text,
-      backgroundColor: isSelected
-        ? colorInfo.selected
-        : colorInfo.background,
+      backgroundColor: isSelected ? colorInfo.selected : colorInfo.background,
       borderColor: colorInfo.border,
       opacity: isSelected ? 1 : 0.65,
       fontWeight: isSelected ? "bold" : "normal",
@@ -233,77 +216,18 @@ function WireSequences() {
                     gap: 0.5,
                   }}
                 >
-                  <ButtonGroup
-                    size="small"
-                    fullWidth
-                  >
+                  <ButtonGroup size="small" fullWidth>
                     <Button
-                      variant={
-                        wire.letter === "A"
-                          ? "contained"
-                          : "outlined"
-                      }
-                      onClick={() =>
-                        updateWire(wireIndex, "letter", "A")
-                      }
-                    >
-                      A
-                    </Button>
-
-                    <Button
-                      variant={
-                        wire.letter === "B"
-                          ? "contained"
-                          : "outlined"
-                      }
-                      onClick={() =>
-                        updateWire(wireIndex, "letter", "B")
-                      }
-                    >
-                      B
-                    </Button>
-
-                    <Button
-                      variant={
-                        wire.letter === "C"
-                          ? "contained"
-                          : "outlined"
-                      }
-                      onClick={() =>
-                        updateWire(wireIndex, "letter", "C")
-                      }
-                    >
-                      C
-                    </Button>
-                  </ButtonGroup>
-
-                  <ButtonGroup
-                    size="small"
-                    fullWidth
-                  >
-                    <Button
-                      variant={
-                        wire.color === "red"
-                          ? "contained"
-                          : "outlined"
-                      }
-                      onClick={() =>
-                        updateWire(wireIndex, "color", "red")
-                      }
+                      variant={wire.color === "red" ? "contained" : "outlined"}
+                      onClick={() => updateWire(wireIndex, "color", "red")}
                       sx={getColorButtonSx("red", wire.color)}
                     >
                       R
                     </Button>
 
                     <Button
-                      variant={
-                        wire.color === "blue"
-                          ? "contained"
-                          : "outlined"
-                      }
-                      onClick={() =>
-                        updateWire(wireIndex, "color", "blue")
-                      }
+                      variant={wire.color === "blue" ? "contained" : "outlined"}
+                      onClick={() => updateWire(wireIndex, "color", "blue")}
                       sx={getColorButtonSx("blue", wire.color)}
                     >
                       B
@@ -311,16 +235,35 @@ function WireSequences() {
 
                     <Button
                       variant={
-                        wire.color === "black"
-                          ? "contained"
-                          : "outlined"
+                        wire.color === "black" ? "contained" : "outlined"
                       }
-                      onClick={() =>
-                        updateWire(wireIndex, "color", "black")
-                      }
+                      onClick={() => updateWire(wireIndex, "color", "black")}
                       sx={getColorButtonSx("black", wire.color)}
                     >
                       K
+                    </Button>
+                  </ButtonGroup>
+                  
+                  <ButtonGroup size="small" fullWidth>
+                    <Button
+                      variant={wire.letter === "A" ? "contained" : "outlined"}
+                      onClick={() => updateWire(wireIndex, "letter", "A")}
+                    >
+                      A
+                    </Button>
+
+                    <Button
+                      variant={wire.letter === "B" ? "contained" : "outlined"}
+                      onClick={() => updateWire(wireIndex, "letter", "B")}
+                    >
+                      B
+                    </Button>
+
+                    <Button
+                      variant={wire.letter === "C" ? "contained" : "outlined"}
+                      onClick={() => updateWire(wireIndex, "letter", "C")}
+                    >
+                      C
                     </Button>
                   </ButtonGroup>
                 </Box>
@@ -341,10 +284,7 @@ function WireSequences() {
                         : action === "DON'T CUT"
                           ? "error.main"
                           : "action.disabledBackground",
-                    color:
-                      action === "N/A"
-                        ? "text.secondary"
-                        : "common.white",
+                    color: action === "N/A" ? "text.secondary" : "common.white",
                   }}
                 >
                   {action}
@@ -363,9 +303,7 @@ function WireSequences() {
           }}
         >
           <IconButton
-            onClick={() =>
-              setCurrentPage((page) => Math.max(page - 1, 0))
-            }
+            onClick={() => setCurrentPage((page) => Math.max(page - 1, 0))}
             disabled={currentPage === 0}
             size="small"
           >
@@ -383,9 +321,7 @@ function WireSequences() {
           </Typography>
 
           <IconButton
-            onClick={() =>
-              setCurrentPage((page) => Math.min(page + 1, 3))
-            }
+            onClick={() => setCurrentPage((page) => Math.min(page + 1, 3))}
             disabled={currentPage === 3}
             size="small"
           >
@@ -406,6 +342,6 @@ function WireSequences() {
       </Button>
     </Box>
   );
-};
+}
 
 export default WireSequences;
