@@ -152,6 +152,9 @@ function Memory() {
         p: 2,
         height: "100%",
         boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: 0,
       }}
     >
       <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
@@ -357,7 +360,8 @@ function Memory() {
         sx={{
           display: "flex",
           justifyContent: "center",
-          mt: 2,
+          mt: "auto",
+          pt: 2,
         }}
       >
         <Button variant="outlined" onClick={resetInputs}>
