@@ -10,6 +10,7 @@ import SimonSays from "./vanilla/SimonSays";
 import WhosOnFirst from "./vanilla/WhosOnFirst";
 import Wires from "./vanilla/Wires";
 import WireSequences from "./vanilla/WireSequences";
+import ColourFlash from "./centurion/section-1/ColourFlash";
 
 const moduleRegistry = {
   button: {
@@ -59,6 +60,10 @@ const moduleRegistry = {
   wireSequences: {
     name: "Wire Sequences",
     component: WireSequences,
+  },
+  colourFlash: {
+    name: "Colour Flash",
+    component: ColourFlash,
   },
 };
 

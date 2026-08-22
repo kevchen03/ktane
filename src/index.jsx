@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { CssBaseline } from "@mui/material";
 
-import App from "./App2";
+import App from "./App";
 import KeyInfoProvider from "./context/KeyInfoContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
