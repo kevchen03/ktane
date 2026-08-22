@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from "react";
 import {
   Box,
+  Button,
   Chip,
   ClickAwayListener,
   FormControl,
@@ -13,6 +14,8 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const currDisplayRules = {
   "Top Left": ["UR"],
@@ -231,7 +234,6 @@ const clickRules = {
     "WHAT?",
     "YOU",
   ],
-
   "YOU ARE": [
     "YOUR",
     "NEXT",
@@ -258,15 +260,23 @@ const displayOptions = [
 
 const buttonOptions = Object.keys(clickRules);
 
+const createInitialRounds = () =>
+  Array.from({ length: 3 }, () => ({
+    currDisplay: null,
+    currWord: null,
+  }));
+
 function WhosOnFirst() {
   const moduleRef = useRef(null);
   const displayAnchorRef = useRef(null);
   const wordAnchorRef = useRef(null);
 
-  const [currDisplay, setCurrDisplay] = useState(null);
-  const [currWord, setCurrWord] = useState(null);
+  const [rounds, setRounds] = useState(createInitialRounds);
+  const [currentRound, setCurrentRound] = useState(0);
   const [openMenu, setOpenMenu] = useState(null);
   const [menuMaxHeight, setMenuMaxHeight] = useState(0);
+
+  const currentRoundData = rounds[currentRound];
 
   const updateMenuPosition = (anchorRef) => {
     if (!moduleRef.current || !anchorRef.current) {
@@ -295,37 +305,56 @@ function WhosOnFirst() {
   };
 
   const handleDisplayChange = (value) => {
-    setCurrDisplay(value);
-    setCurrWord(null);
+    setRounds((prev) =>
+      prev.map((round, index) =>
+        index === currentRound
+          ? {
+              currDisplay: value,
+              currWord: null,
+            }
+          : round,
+      ),
+    );
+
     handleCloseMenu();
   };
 
   const handleWordChange = (value) => {
-    setCurrWord(value);
+    setRounds((prev) =>
+      prev.map((round, index) =>
+        index === currentRound
+          ? {
+              ...round,
+              currWord: value,
+            }
+          : round,
+      ),
+    );
+
     handleCloseMenu();
   };
 
   const location = useMemo(() => {
-    if (currDisplay === null) {
+    if (currentRoundData.currDisplay === null) {
       return "";
     }
 
     for (const [key, values] of Object.entries(currDisplayRules)) {
-      if (values.includes(currDisplay)) {
+      if (values.includes(currentRoundData.currDisplay)) {
         return key;
       }
     }
 
     return "ERROR";
-  }, [currDisplay]);
+  }, [currentRoundData.currDisplay]);
 
   const pressOrder = useMemo(() => {
-    if (currWord === null) {
+    if (currentRoundData.currWord === null) {
       return [];
     }
 
-    return clickRules[currWord] || [];
-  }, [currWord]);
+    return clickRules[currentRoundData.currWord] || [];
+  }, [currentRoundData.currWord]);
 
   const renderDropdown = (
     menu,
@@ -428,6 +457,16 @@ function WhosOnFirst() {
     );
   };
 
+  const goToPreviousRound = () => {
+    setCurrentRound((prev) => Math.max(0, prev - 1));
+    handleCloseMenu();
+  };
+
+  const goToNextRound = () => {
+    setCurrentRound((prev) => Math.min(2, prev + 1));
+    handleCloseMenu();
+  };
+
   return (
     <Box
       ref={moduleRef}
@@ -489,7 +528,11 @@ function WhosOnFirst() {
               fullWidth
               label="Display"
               notched
-              value={currDisplay === null ? "Nothing Selected" : currDisplay}
+              value={
+                currentRoundData.currDisplay === null
+                  ? "Nothing Selected"
+                  : currentRoundData.currDisplay
+              }
               readOnly
               endAdornment={<ArrowDropDownIcon />}
               sx={{
@@ -506,7 +549,7 @@ function WhosOnFirst() {
           "display",
           displayAnchorRef,
           displayOptions,
-          currDisplay,
+          currentRoundData.currDisplay,
           handleDisplayChange,
           "Nothing Selected",
         )}
@@ -561,7 +604,11 @@ function WhosOnFirst() {
               fullWidth
               label="Word"
               notched
-              value={currWord === null ? "Nothing Selected" : currWord}
+              value={
+                currentRoundData.currWord === null
+                  ? "Nothing Selected"
+                  : currentRoundData.currWord
+              }
               readOnly
               endAdornment={<ArrowDropDownIcon />}
               sx={{
@@ -578,7 +625,7 @@ function WhosOnFirst() {
           "word",
           wordAnchorRef,
           buttonOptions,
-          currWord,
+          currentRoundData.currWord,
           handleWordChange,
           "Nothing Selected",
         )}
@@ -628,6 +675,53 @@ function WhosOnFirst() {
             Nothing selected!
           </Typography>
         )}
+      </Box>
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          mt: 2,
+        }}
+      >
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={goToPreviousRound}
+          disabled={currentRound === 0}
+          sx={{
+            minWidth: 40,
+            px: 1,
+          }}
+        >
+          <ArrowBackIcon fontSize="small" />
+        </Button>
+
+        <Typography
+          variant="body2"
+          sx={{
+            minWidth: 48,
+            textAlign: "center",
+            fontWeight: 500,
+          }}
+        >
+          {currentRound + 1} / 3
+        </Typography>
+
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={goToNextRound}
+          disabled={currentRound === 2}
+          sx={{
+            minWidth: 40,
+            px: 1,
+          }}
+        >
+          <ArrowForwardIcon fontSize="small" />
+        </Button>
       </Box>
     </Box>
   );

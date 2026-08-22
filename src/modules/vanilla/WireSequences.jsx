@@ -243,7 +243,7 @@ function WireSequences() {
                       K
                     </Button>
                   </ButtonGroup>
-                  
+
                   <ButtonGroup size="small" fullWidth>
                     <Button
                       variant={wire.letter === "A" ? "contained" : "outlined"}
@@ -299,33 +299,68 @@ function WireSequences() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: 2,
+            gap: 1,
           }}
         >
           <IconButton
             onClick={() => setCurrentPage((page) => Math.max(page - 1, 0))}
             disabled={currentPage === 0}
             size="small"
-          >
-            <ArrowBackIcon />
-          </IconButton>
-
-          <Typography
             sx={{
-              minWidth: 24,
-              textAlign: "center",
-              fontWeight: "bold",
+              width: 36,
+              height: 36,
+              border: 1,
+              borderColor: "divider",
+              borderRadius: 1,
+              "&:hover": {
+                borderColor: "primary.main",
+                backgroundColor: "action.hover",
+              },
             }}
           >
-            {currentPage + 1}
-          </Typography>
+            <ArrowBackIcon fontSize="small" />
+          </IconButton>
+
+          <Box
+            sx={{
+              minWidth: 36,
+              height: 36,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: 1,
+              borderColor: "divider",
+              borderRadius: 1,
+              backgroundColor: "action.hover",
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: "bold",
+                lineHeight: 1,
+              }}
+            >
+              {currentPage + 1}
+            </Typography>
+          </Box>
 
           <IconButton
             onClick={() => setCurrentPage((page) => Math.min(page + 1, 3))}
             disabled={currentPage === 3}
             size="small"
+            sx={{
+              width: 36,
+              height: 36,
+              border: 1,
+              borderColor: "divider",
+              borderRadius: 1,
+              "&:hover": {
+                borderColor: "primary.main",
+                backgroundColor: "action.hover",
+              },
+            }}
           >
-            <ArrowForwardIcon />
+            <ArrowForwardIcon fontSize="small" />
           </IconButton>
         </Box>
       </Box>
