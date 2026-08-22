@@ -1,292 +1,114 @@
-import React, { useState } from "react";
-import "./styling/commonStyles.css";
-import "./App.css";
-import SimpleWires from "./components/Original/SimpleWires/SimpleWires";
-import Button from "./components/Original/Button/Button";
-import Keypads from "./components/Original/Keypads/Keypads";
-import SimonSays from "./components/Original/SimonSays/SimonSays";
-import WhosOnFirst from "./components/Original/WhosOnFirst/WhosOnFirst";
-import Memory from "./components/Original/Memory/Memory";
-import MorseCode from "./components/Original/MorseCode/MorseCode";
-import ComplicatedWires from "./components/Original/ComplicatedWires/ComplicatedWires";
-import WireSequences from "./components/Original/WireSequences/WireSequences";
-import SimpleMaze from "./components/Original/SimpleMaze/SimpleMaze";
-import Passwords from "./components/Original/Passwords/Passwords";
-import Knobs from "./components/Original/Knobs/Knobs";
-import ColorFlash from "./components/Centurion/ColorFlash/ColorFlash";
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
+import TopBar from "./components/TopBar";
+import KeyInfoSidebar from "./components/KeyInfoSidebar";
+import ModuleGrid from "./components/ModuleGrid";
+import ModuleMenu from "./components/ModuleMenu";
 
 function App() {
-  const [serial, setSerial] = useState("");
-  const [strikes, setStrikes] = useState(0);
-  const [serialProps, setSerialProps] = useState({ even: false, vowel: false });
-  const [litIndicators, setLitIndicators] = useState({
-    BOB: null,
-    CAR: null,
-    CLR: null,
-    FRK: null,
-    FRQ: null,
-    IND: null,
-    MSA: null,
-    NSA: null,
-    SIG: null,
-    SND: null,
-    TRN: null,
-  });
-  const [batteries, setBatteries] = useState({
-    AA: 0,
-    D: 0,
-  });
-  const [ports, setPorts] = useState({
-    "DVI-D": 0,
-    Parallel: 0,
-    "PS/2": 0,
-    "RJ-45": 0,
-    Serial: 0,
-    "Stereo RCA": 0,
-  });
+  const [modules, setModules] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [clearDialogOpen, setClearDialogOpen] = useState(false);
 
-  const updateSerial = (newSerial) => {
-    // Clean and convert to uppercase
-    const cleaned = newSerial.replace(/\s+/g, "").toUpperCase().slice(0, 6); // <-- limit to 6 characters
-    setSerial(cleaned);
-    if (cleaned.length < 6) {
-      setSerialProps({ even: false, vowel: false });
-      return;
-    }
-
-    let lastDigit = null;
-    for (let i = cleaned.length - 1; i >= 0; i--) {
-      const char = cleaned[i];
-      if (!lastDigit && /\d/.test(char)) {
-        lastDigit = parseInt(char);
-        break;
-      }
-    }
-
-    setSerialProps({
-      even: lastDigit !== null && lastDigit % 2 === 0,
-      vowel: (cleaned.match(/[AEIOU]/g) || []).length > 0,
-    });
+  const addModule = (type) => {
+    setModules((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        type,
+      },
+    ]);
   };
 
-  const updateStrikes = (newStrikes) => {
-    const val = Number.parseInt(newStrikes);
-    if (Number.isNaN(val) || val < 0) return;
-    setStrikes(val);
+  const removeModule = (id) => {
+    setModules((prev) => prev.filter((module) => module.id !== id));
   };
 
-  const updateBatteries = (event) => {
-    const { name, value } = event.target;
-    const val = Number.parseInt(value);
-    if (Number.isNaN(val) || val < 0) return;
-    const newBatteries = { ...batteries, [name]: val };
-    setBatteries(newBatteries);
+  const clearModules = () => {
+    setClearDialogOpen(true);
   };
 
-  const updatePorts = (event) => {
-    const { name, value } = event.target;
-    const val = Number.parseInt(value);
-    if (Number.isNaN(val) || val < 0) return;
-    const newBatteries = { ...ports, [name]: val };
-    setPorts(newBatteries);
+  const confirmClearModules = () => {
+    setModules([]);
+    setClearDialogOpen(false);
   };
 
-  const reset = () => {
-    updateSerial("");
-    setStrikes(0);
-    setLitIndicators(
-      Object.fromEntries(
-        Object.keys(litIndicators).map((key) => {
-          return [key, null];
-        })
-      )
-    );
-    setBatteries({ AA: 0, D: 0 });
-    setPorts(
-      Object.fromEntries(
-        Object.keys(ports).map((key) => {
-          return [key, 0];
-        })
-      )
-    )
+  const cancelClearModules = () => {
+    setClearDialogOpen(false);
+  };
+
+  const reorderModules = (reorderedModules) => {
+    setModules(reorderedModules);
   };
 
   return (
-    <div className="appLayout">
-      <div className="sidebar">
-        <div className="sidebarContent">
-          <div className="labelRowStyle">
-            <label htmlFor="serial" className="labelStyle">
-              Serial Number:
-            </label>
-            <input
-              id="serial"
-              type="text"
-              value={serial}
-              onChange={(e) => updateSerial(e.target.value)}
-              maxLength={6} // <-- Add maxLength to restrict input to 6 characters
-              className="styledTextInput"
-            />
-          </div>
-          <div className="labelRowStyle">
-            <label htmlFor="strikes" className="labelStyle">
-              Strikes:
-            </label>
-            <input
-              id="strikes"
-              type="number"
-              value={strikes}
-              onChange={(e) => updateStrikes(e.target.value)}
-              className="styledNumInput"
-            />
-          </div>
-          <div
-            style={{
-              borderTop: "2px solid #444",
-            }}
-          >
-            <h3>Lit Indicators</h3>
-            {Object.entries(litIndicators).map(([key, value]) => (
-              <div key={key} className="labelRowStyle">
-                <label className="labelStyle">{key}</label>
-                <div style={{ display: "flex", gap: "8px" }}>
-                  {[
-                    { label: "DNE", val: null },
-                    { label: "Unlit", val: false },
-                    { label: "Lit", val: true },
-                  ].map(({ label, val }) => (
-                    <button
-                      className="litIndicator"
-                      key={label}
-                      onClick={() =>
-                        setLitIndicators((prev) => ({ ...prev, [key]: val }))
-                      }
-                      style={{
-                        backgroundColor: value === val ? "#007bff" : "#f0f0f0",
-                        color: value === val ? "#fff" : "#000",
-                      }}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div
-            style={{
-              borderTop: "2px solid #444",
-            }}
-          >
-            <h3>Batteries</h3>
-            {Object.entries(batteries).map(([key, value]) => {
-              return (
-                <div key={key} className="labelRowStyle">
-                  <label htmlFor={key} className="labelStyle">
-                    {key}
-                  </label>
-                  <input
-                    id={key}
-                    name={key}
-                    className="styledNumInput"
-                    type="number"
-                    value={value}
-                    onChange={(e) => updateBatteries(e)}
-                  />
-                </div>
-              );
-            })}
-          </div>
-          <div style={{ borderTop: "2px solid #444" }}>
-            <h3>Ports</h3>
-            {Object.entries(ports).map(([key, value]) => {
-              return (
-                <div key={key} className="labelRowStyle">
-                  <label htmlFor={key} className="labelStyle">
-                    {key}
-                  </label>
-                  <input
-                    id={key}
-                    name={key}
-                    className="styledNumInput"
-                    type="number"
-                    value={value}
-                    onChange={(e) => updatePorts(e)}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        {/* Reset button here */}
-        <div className="sidebarReset">
-          <button onClick={reset} className="resetButton">
-            🔁 Reset
-          </button>
-        </div>
-      </div>
-      <div className="moduleGrid">
-        <div className="moduleBox">
-          <SimpleWires serialProps={serialProps} />
-        </div>
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+    >
+      <TopBar
+        onMenuToggle={() => setMenuOpen((prev) => !prev)}
+        onClearModules={clearModules}
+        hasModules={modules.length > 0}
+      />
+      <Box
+        sx={{
+          display: "flex",
+          flex: 1,
+          minHeight: 0,
+          overflow: "hidden",
+        }}
+      >
+        <KeyInfoSidebar />
+        <ModuleGrid
+          modules={modules}
+          onRemoveModule={removeModule}
+          onClearModules={() => setModules([])}
+          onReorderModules={reorderModules}
+          onOpenModuleMenu={() => setMenuOpen(true)}
+        />
+      </Box>
+      <ModuleMenu
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onAddModule={addModule}
+      />
 
-        <div className="moduleBox">
+      <Dialog open={clearDialogOpen} onClose={cancelClearModules}>
+        <DialogTitle>Clear All Modules?</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to remove all modules from the grid? This
+            action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={cancelClearModules}>Cancel</Button>
+
           <Button
-            CAR={litIndicators.CAR}
-            FRK={litIndicators.FRK}
-            batteries={batteries.AA + batteries.D}
-          />
-        </div>
-
-        <div className="moduleBox">
-          <Keypads />
-        </div>
-
-        <div className="moduleBox">
-          <SimonSays serialProps={serialProps} strikes={strikes} />
-        </div>
-
-        <div className="moduleBox">
-          <WhosOnFirst />
-        </div>
-
-        <div className="moduleBox">
-          <Memory />
-        </div>
-
-        <div className="moduleBox">
-          <MorseCode />
-        </div>
-
-        <div className="moduleBox">
-          <ComplicatedWires
-            even={serialProps.even}
-            parallel={ports.Parallel}
-            batteries={batteries.AA + batteries.D}
-          />
-        </div>
-
-        <div className="moduleBox">
-          <WireSequences />
-        </div>
-
-        <div className="moduleBox">
-          <SimpleMaze />
-        </div>
-
-        <div className="moduleBox">
-          <Passwords />
-        </div>
-
-        <div className="moduleBox">
-          <Knobs />
-        </div>
-
-        <div className="moduleBox">
-          <ColorFlash />
-        </div>
-      </div>
-    </div>
+            onClick={confirmClearModules}
+            color="error"
+            variant="contained"
+          >
+            Clear All
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
   );
 }
 
