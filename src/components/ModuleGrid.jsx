@@ -192,7 +192,7 @@ function ModuleGrid({
             </Box>
           </Box>
         ) : (
-          modules.map((module) => {
+          modules.map((module, index) => {
             const definition = moduleRegistry[module.type];
             if (!definition) {
               return null;
@@ -251,7 +251,7 @@ function ModuleGrid({
                       textOverflow: "ellipsis",
                     }}
                   >
-                    {definition.name}
+                    {index + 1}. {definition.name}
                   </Typography>
 
                   <Tooltip title="Remove module">
