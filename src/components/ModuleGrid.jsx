@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import AddIcon from "@mui/icons-material/Add";
 import moduleRegistry from "@/modules/moduleRegistry";
 
@@ -212,13 +213,14 @@ function ModuleGrid({
                   minHeight: 0,
                   width: "100%",
                   height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
                   opacity: draggedModuleId === module.id ? 0.5 : 1,
                   border: dragOverModuleId === module.id ? 2 : 0,
                   borderColor: "primary.main",
                   boxSizing: "border-box",
                   transition: "opacity 0.15s, border 0.15s",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
                 <Box
@@ -226,29 +228,33 @@ function ModuleGrid({
                   onDragStart={(event) => handleDragStart(event, module.id)}
                   onDragEnd={handleDragEnd}
                   sx={{
+                    flexShrink: 0,
+                    height: 40,
+                    px: 1,
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "space-between",
-                    minHeight: 40,
-                    px: 1.5,
+                    gap: 0.5,
                     borderBottom: 1,
                     borderColor: "divider",
+                    bgcolor: "background.paper",
                     cursor: "grab",
                     userSelect: "none",
-                    flexShrink: 0,
                     "&:active": {
                       cursor: "grabbing",
                     },
                   }}
                 >
+                  <DragIndicatorIcon fontSize="small" color="action" />
+
                   <Typography
-                    variant="subtitle1"
+                    variant="subtitle2"
                     fontWeight={600}
-                    noWrap
                     sx={{
+                      flex: 1,
                       minWidth: 0,
                       overflow: "hidden",
                       textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     {index + 1}. {definition.name}
@@ -257,12 +263,19 @@ function ModuleGrid({
                   <Tooltip title="Remove module">
                     <IconButton
                       size="small"
-                      onClick={() => handleRemoveClick(module)}
-                      onMouseDown={(event) => event.stopPropagation()}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleRemoveClick(module);
+                      }}
+                      onMouseDown={(event) => {
+                        event.stopPropagation();
+                      }}
+                      onDragStart={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                      }}
                       draggable={false}
-                      aria-label="Remove module"
                       sx={{
-                        ml: 1,
                         flexShrink: 0,
                       }}
                     >
@@ -275,6 +288,7 @@ function ModuleGrid({
                   sx={{
                     flex: 1,
                     minHeight: 0,
+                    minWidth: 0,
                   }}
                 >
                   <ModuleComponent />

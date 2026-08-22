@@ -152,17 +152,28 @@ function SimonSays() {
           component="img"
           src={ruleImages[strikeRule]}
           alt="Simon Says Rule"
+          draggable={false}
+          onDragStart={(event) => event.preventDefault()}
+          onSelect={(event) => event.preventDefault()}
+          onMouseDown={(event) => {
+            if (event.detail > 1) {
+              event.preventDefault();
+            }
+          }}
           sx={{
             maxWidth: "90%",
             maxHeight: "100%",
             width: "auto",
             height: "auto",
             objectFit: "contain",
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            WebkitUserDrag: "none",
           }}
         />
       </Box>
     </Box>
   );
-};
+}
 
 export default SimonSays;

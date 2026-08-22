@@ -140,6 +140,14 @@ function Button() {
           component="img"
           src={holdImage}
           alt="Button hold information"
+          draggable={false}
+          onDragStart={(event) => event.preventDefault()}
+          onSelect={(event) => event.preventDefault()}
+          onMouseDown={(event) => {
+            if (event.detail > 1) {
+              event.preventDefault();
+            }
+          }}
           sx={{
             maxWidth: "100%",
             maxHeight: "100%",
@@ -147,6 +155,9 @@ function Button() {
             height: "auto",
             objectFit: "contain",
             display: "block",
+            userSelect: "none",
+            WebkitUserSelect: "none",
+            WebkitUserDrag: "none",
           }}
         />
       </Box>
